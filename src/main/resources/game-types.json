@@ -8,19 +8,19 @@
     ]
   },
   {
-    "name": "red_soldier",
+    "name": "Red_soldier",
     "_extends": "abstract_soldier",
     "_sprite": {
       "_image": "image path"
     }
   },
   {
-  "name": "blue_soldier",
-  "_extends": "abstract_soldier",
-  "_sprite": {
-    "_image": "image path"
-  }
-},
+    "name": "Blue_Soldier",
+    "_extends": "abstract_soldier",
+    "_sprite": {
+      "_image": "image path"
+    }
+  },
   {
     "name": "Red_Builder",
     "_extends": "abstract_civilian",
@@ -70,6 +70,35 @@
     "_actions": [
       "AutoBuild[Blue_Tower]"
     ]
+  },
+  {
+    "name": "Red_Tower",
+    "sprite": {
+      "image": "Entities/Red_Tower"
+    },
+    "properties": {
+      "health": 1
+    },
+    "cost": {
+      "energy": 0
+    },
+    "_actions": [
+      "ExpandAction"
+    ]
+  },
+  {
+    "name": "Blue_Tower",
+    "sprite": {
+      "image": "Entities/Blue_Tower"
+    },
+    "properties": {
+      "health": 1
+    },
+    "cost": {
+      "energy": 0
+    },
+    "_actions": [
+      "ExpandAction"
+    ]
   }
-
 ]
