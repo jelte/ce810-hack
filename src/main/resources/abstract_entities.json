@@ -1,0 +1,33 @@
+[
+  {
+    "name":"abstract_soldier",
+    "properties": {
+      "movement":1,
+      "health":1,
+      "attackRange": 1,
+      "atkMelee":1,
+      "ter-grass":1
+    },
+    "cost":{
+      "energy":10
+    },
+    "_actions":[
+      "Attack",
+      "Move"
+    ]
+  },
+  {
+    "name": "abstract_minerals",
+    "_sprite": {
+      "_image": "image path",
+      "scale": 0.75
+    },
+    "properties": {
+      "health": 10
+    }
+
+  }
+
+
+
+]
