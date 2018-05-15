@@ -12,11 +12,9 @@ import java.util.List;
 public class ExpandOrder implements Order {
 
     private final int quantityPerTurn;
-    private final TerrainType[] hostTiles;
 
-    public ExpandOrder(int quantityPerTurn, TerrainType[] hostTiles) {
+    public ExpandOrder(int quantityPerTurn) {
         this.quantityPerTurn = quantityPerTurn;
-        this.hostTiles = hostTiles;
     }
 
     @Override
@@ -38,16 +36,19 @@ public class ExpandOrder implements Order {
         closest.sort((a, b) -> (
             state.getDistance(host.getPos(), a.getPos()) < state.getDistance(host.getPos(), b.getPos()) ? -1 : 1
         ));
+        TerrainType walkable = state.getSettings().getTerrainType("walkable");
+        TerrainType hostTerrainType = state.getSettings().getTerrainType(host.getType().getName().substring(0, host.getType().getName().indexOf("_") -1));
+
         // Only process closest 2
         for (Entity entity : closest.subList(0, 1)) {
             state.getCalc().drawLine(state.cube2hex(host.getPos()), state.cube2hex(entity.getPos())).forEach((tile) -> {
                 // Get all ground & contestable tiles
-                if (state.getTerrainAt(tile.getCubeCoordinate()).getName().startsWith("Ground") && !grounds.contains(tile.getCubeCoordinate())) {
+                if (state.getTerrainAt(tile.getCubeCoordinate()).equals(walkable) && !grounds.contains(tile.getCubeCoordinate())) {
                     grounds.add(tile.getCubeCoordinate());
                 }
 
                 // Get all occupied tiles
-                if (state.getTerrainAt(tile.getCubeCoordinate()).getName().startsWith("Occuppied_"+host.getOwner()) && !occuppied.contains(tile.getCubeCoordinate())) {
+                if (state.getTerrainAt(tile.getCubeCoordinate()).equals(hostTerrainType) && !occuppied.contains(tile.getCubeCoordinate())) {
                     occuppied.add(tile.getCubeCoordinate());
                 }
             });
@@ -57,7 +58,7 @@ public class ExpandOrder implements Order {
             for (int j = i + 1; j < occuppied.size(); j++) {
                 state.getCalc().drawLine(state.cube2hex(occuppied.get(i)), state.cube2hex(occuppied.get(j))).forEach((tile) -> {
                     // Get all ground & contestable tiles
-                    if (state.getTerrainAt(tile.getCubeCoordinate()).getName().startsWith("Ground") && !grounds.contains(tile.getCubeCoordinate())) {
+                    if (state.getTerrainAt(tile.getCubeCoordinate()).equals(walkable) && !grounds.contains(tile.getCubeCoordinate())) {
                         grounds.add(tile.getCubeCoordinate());
                     }
                 });
@@ -65,7 +66,7 @@ public class ExpandOrder implements Order {
         }
         // assign terrains
         for (int m = 0; m < quantityPerTurn; m++) {
-            state.setTerrainAt(grounds.get(m), hostTiles[host.getOwner()]);
+            state.setTerrainAt(grounds.get(m), hostTerrainType);
         }
     }
 }
