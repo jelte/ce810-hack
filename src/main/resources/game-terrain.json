@@ -1,4 +1,4 @@
 [
-  {"id": "plain", "requiredTags": {"grass": 1}, "image": "white"},
+  {"id": "plain", "requiredTags": {"grass": 1}, "image": "Red_Tile"},
   {"id":"obstacle", "requiredTags":{}, "image": "grey"}
 ]

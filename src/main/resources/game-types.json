@@ -3,7 +3,7 @@
     "name": "Red_Builder",
     "_extends": "abstract_civilian",
     "sprite": {
-      "image": "Entities/RedBuilder"
+      "image": "RedBuilder"
     },
     "actions":[
       "Build[Red_TowerHalf]"
@@ -13,7 +13,7 @@
     "name": "Blue_Builder",
     "_extends": "abstract_civilian",
     "sprite": {
-      "image": "Entities/BlueBuilder"
+      "image": "BlueBuilder"
     },
     "actions":[
       "Build[Blue_TowerHalf]"
@@ -22,7 +22,7 @@
   {
     "name": "Red_TowerHalf",
     "sprite": {
-      "image": "Entities/Red_TowerHalf"
+      "image": "Red_TowerHalf"
     },
     "properties": {
       "health": 1
@@ -37,7 +37,7 @@
   {
     "name": "Blue_TowerHalf",
     "sprite": {
-      "image": "Entities/Blue_TowerHalf"
+      "image": "Blue_TowerHalf"
     },
     "properties": {
       "health": 1
