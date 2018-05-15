@@ -1,0 +1,4 @@
+[
+  {"id": "plain", "requiredTags": {"grass": 1}, "image": "white"},
+  {"id":"obstacle", "requiredTags":{}, "image": "grey"}
+]
