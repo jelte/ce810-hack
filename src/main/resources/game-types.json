@@ -21,7 +21,7 @@
     "_image": "image path"
   }
 },
-
+  {
     "name": "Red_Builder",
     "_extends": "abstract_civilian",
     "sprite": {
