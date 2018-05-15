@@ -4,5 +4,4 @@
   {"id": "resources", "requiredTags": {"grass": 1}, "image": "Resource_Tile"},
   {"id": "blue_tile", "requiredTags": {"grass": 1}, "image": "Blue_Tile"},
   {"id": "red_tile", "requiredTags": {"grass": 1}, "image": "Red_Tile"}
-
 ]
