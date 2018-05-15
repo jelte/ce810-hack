@@ -1,3 +1,7 @@
 [
-
+  {
+    "name": "energy",
+    "color": "238,244,66",
+    "image": "energy"
+  }
 ]

@@ -1,0 +1,112 @@
+[
+  {
+    "name": "abstract_town",
+    "properties": {
+      "health": 100,
+      "defence": 9,
+      "ter-grass": 1
+    },
+    "cost": {
+      "wood": 50,
+      "gold": 100
+    },
+    "_actions": [
+      "Generate[food:10]"
+    ]
+  },
+  {
+    "name": "abstract_archery",
+    "properties": {
+      "health": 20,
+      "defence": 3,
+      "ter-grass": 1
+    },
+    "cost": {
+      "wood": 100,
+      "gold": 10
+    }
+  },
+  {
+    "name": "abstract_knightery",
+    "properties": {
+      "health": 20,
+      "defence": 3,
+      "ter-grass": 1
+    },
+    "cost": {
+      "food": 50,
+      "wood": 100,
+      "gold": 100
+    }
+  },
+  {
+    "name": "abstract_civilian",
+    "properties": {
+      "movement": 1,
+      "health": 1,
+      "attackRange": 1,
+      "atkMelee": 1,
+      "ter-grass": 1
+    },
+    "cost": {
+      "energy": 1
+    },
+    "_actions": [
+      "Move"
+    ]
+  },
+  {
+    "name": "abstract_archer",
+    "properties": {
+      "movement": 1,
+      "health": 10,
+      "attackRange": 2,
+      "atkMelee": 1,
+      "atkRanged": 5,
+      "defRanged": 1,
+      "ter-grass": 1
+    },
+    "cost": {
+      "food": 15,
+      "wood": 5,
+      "gold": 10
+    },
+    "_actions": [
+      "Move",
+      "RangeAttackAction"
+    ]
+  },
+  {
+    "name": "abstract_knight",
+    "properties": {
+      "movement": 1,
+      "health": 15,
+      "attackRange": 1,
+      "atkMelee": 10,
+      "defMelee": 3,
+      "defRanged": 3,
+      "ter-grass": 1
+    },
+    "cost": {
+      "food": 20,
+      "gold": 30
+    },
+    "_actions": [
+      "Move",
+      "MeleeAttackAction"
+    ]
+  },
+  {
+    "name": "abstract_king",
+    "properties": {
+      "movement": 1,
+      "health": 50,
+      "defMelee": 1,
+      "defRanged": 1,
+      "ter-grass": 1
+    },
+    "_actions": [
+      "Move"
+    ]
+  }
+]

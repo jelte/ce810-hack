@@ -1,3 +1,53 @@
 [
-  
+  {
+    "name": "Red_Builder",
+    "_extends": "abstract_civilian",
+    "sprite": {
+      "image": "Entities/RedBuilder"
+    },
+    "actions":[
+      "Build[Red_TowerHalf]"
+    ]
+  },
+  {
+    "name": "Blue_Builder",
+    "_extends": "abstract_civilian",
+    "sprite": {
+      "image": "Entities/BlueBuilder"
+    },
+    "actions":[
+      "Build[Blue_TowerHalf]"
+    ]
+  },
+  {
+    "name": "Red_TowerHalf",
+    "sprite": {
+      "image": "Entities/Red_TowerHalf"
+    },
+    "properties": {
+      "health": 1
+    },
+    "cost": {
+      "energy": 0
+    },
+    "_actions": [
+      "AutoBuild[Red_Tower]"
+    ]
+  },
+  {
+    "name": "Blue_TowerHalf",
+    "sprite": {
+      "image": "Entities/Blue_TowerHalf"
+    },
+    "properties": {
+      "health": 1
+    },
+    "cost": {
+      "energy": 0
+    },
+    "_actions": [
+      "AutoBuild[Blue_Tower]"
+    ]
+  }
+
 ]

@@ -1,4 +1,5 @@
 {
-
+  "EnsureBlueWorker":"EnsureEntity[Blue_Base:Blue_Builder:1]",
+  "EnsureRedWorker":"EnsureEntity[Red_Base:Red_Builder:1]"
 
 }
