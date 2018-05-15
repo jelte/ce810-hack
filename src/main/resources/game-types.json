@@ -1,5 +1,27 @@
 [
   {
+
+    "name": "minerals",
+    "_extends":"abstract_minerals",
+    "_actions": [
+      "Generate[energy:5]"
+    ]
+  },
+  {
+    "name": "red_soldier",
+    "_extends": "abstract_soldier",
+    "_sprite": {
+      "_image": "image path"
+    }
+  },
+  {
+  "name": "blue_soldier",
+  "_extends": "abstract_soldier",
+  "_sprite": {
+    "_image": "image path"
+  }
+},
+
     "name": "Red_Builder",
     "_extends": "abstract_civilian",
     "sprite": {

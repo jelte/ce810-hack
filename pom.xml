@@ -23,7 +23,6 @@
 	<dependency>
 		<groupId>com.fossgalaxy.games.tbs</groupId>
 		<artifactId>basic-tbs</artifactId>
-		<version>0.1-SNAPSHOT</version>
 	</dependency>
   </dependencies>
 </project>

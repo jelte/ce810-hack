@@ -3,7 +3,7 @@
   "turnLimit": 100,
   "resourcesFileName":"game-resources.json",
   "terrainFileName":"game-terrain.json",
-  "typeFiles":["game-types.json"],
+  "typeFiles":["game-types.json","abstract_entities.json"],
   "evalFileName":"game-eval.json",
   "aiFileName":"game-ai.json",
   "ruleFileName":"game-rules.json",
