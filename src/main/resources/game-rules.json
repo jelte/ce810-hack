@@ -1,9 +1,9 @@
 {
 
-  "RedSoldierAttack":"Filter[AttackMelee:red_soldier]",
-  "RedSoldierAttack":"Filter[AttackMelee:red_worker]",
-  "BlueSoldierAttack":"Filter[AttackMelee:blue_soldier]",
-  "BlueSoldierAttack":"Filter[AttackMelee:blue_worker]",
+  "RedSoldierAttack":"Filter[AttackMelee:Red_soldier]",
+  "RedSoldierAttack":"Filter[AttackMelee:Red_Builder]",
+  "BlueSoldierAttack":"Filter[AttackMelee:Rlue_soldier]",
+  "BlueSoldierAttack":"Filter[AttackMelee:Blue_Builder]",
   "EnsureBlueWorker":"EnsureEntity[Blue_Base:Blue_Builder:1]",
   "EnsureRedWorker":"EnsureEntity[Red_Base:Red_Builder:1]"
 

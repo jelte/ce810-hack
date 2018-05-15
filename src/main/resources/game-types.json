@@ -10,15 +10,15 @@
   {
     "name": "Red_soldier",
     "_extends": "abstract_soldier",
-    "_sprite": {
-      "_image": "image path"
+    "sprite": {
+      "image": "RedBuilder"
     }
   },
   {
     "name": "Blue_Soldier",
     "_extends": "abstract_soldier",
-    "_sprite": {
-      "_image": "image path"
+    "sprite": {
+      "image": "BlueBuilder"
     }
   },
   {
@@ -27,7 +27,7 @@
     "sprite": {
       "image": "RedBuilder"
     },
-    "actions":[
+    "_actions":[
       "Build[Red_TowerHalf]"
     ]
   },
