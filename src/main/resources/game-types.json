@@ -100,5 +100,28 @@
     "_actions": [
       "ExpandAction"
     ]
+  },
+  {
+    "name" : "red_base",
+    "sprite" : {
+      "image" : "RedBase",
+      "scale" : 0.8
+    },
+    "properties" : {
+      "health" : 10
+    }
+  },
+  {
+    "name": "blue_base",
+    "sprite": {
+      "image": "BlueBase",
+      "scale": 0.8
+    },
+    "properties": {
+      "health": 10
+    }
   }
+
+
+
 ]

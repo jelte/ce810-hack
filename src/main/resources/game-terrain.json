@@ -1,4 +1,8 @@
 [
-  {"id": "plain", "requiredTags": {"grass": 1}, "image": "Red_Tile"},
-  {"id":"obstacle", "requiredTags":{}, "image": "grey"}
+  {"id": "walkable", "requiredTags": {"grass": 1}, "image": "Ground_Tile"},
+  {"id": "unwalkable", "requiredTags":{}, "image": "UnWalkable_Tile"},
+  {"id": "resources", "requiredTags": {"grass": 1}, "image": "Resource_Tile"},
+  {"id": "blue_tile", "requiredTags": {"grass": 1}, "image": "Blue_Tile"},
+  {"id": "red_tile", "requiredTags": {"grass": 1}, "image": "Red_Tile"}
+
 ]
