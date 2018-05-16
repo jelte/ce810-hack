@@ -8,6 +8,5 @@
   "aiFileName":"game-ai.json",
   "ruleFileName":"game-rules.json",
   "rules":[
-    "LastManStanding"
   ]
 }
