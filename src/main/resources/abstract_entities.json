@@ -19,7 +19,7 @@
   {
     "name":"abstract_civilian",
     "properties": {
-      "movement":1,
+      "movement":2,
       "health":1,
       "ter-grass":1
     },
