@@ -63,7 +63,7 @@
       "energy": 0
     },
     "_actions": [
-      "Generate[energy:1]"
+      "AutoGenerate[energy:10]"
     ]
   },
   {

@@ -7,7 +7,7 @@
     ]
   },
   {
-    "name": "Red_soldier",
+    "name": "Red_Soldier",
     "_extends": "abstract_soldier",
     "sprite": {
       "image": "RedTank"
@@ -90,14 +90,23 @@
     "sprite" : {
       "image" : "RedBase",
       "scale" : 0.8
-    }
+    },
+    "_actions":[
+      "Build[Red_Builder]",
+      "Build[Red_Soldier]"
+    ]
   },
   {
     "name": "Blue_base",
-    "_extends":"abstract_tower",
+    "_extends":"abstract_base",
     "sprite": {
       "image": "BlueBase",
       "scale": 0.8
-    }
+    },
+    "_actions":[
+      "Build[Blue_Builder]",
+      "Build[Blue_Soldier]"
+
+    ]
   }
 ]
