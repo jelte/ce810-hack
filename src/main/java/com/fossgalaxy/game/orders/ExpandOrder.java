@@ -25,7 +25,9 @@ public class ExpandOrder implements Order {
         List<Entity> closest = new ArrayList<>();
 
         for (Entity entity : state.getOwnedEntities(host.getOwner())) {
-            if (entity.getType().getName().endsWith("_Base") || entity.getType().equals(host.getType()) && !entity.equals(host) && state.getCalc().isVisible(state.cube2hex(host.getPos()), state.cube2hex(entity.getPos()))) {
+            if (entity.getType().getName().toLowerCase().endsWith("_base") ||
+                    (entity.getType().equals(host.getType()) && !entity.equals(host) && state.getCalc().isVisible(state.cube2hex(host.getPos()), state.cube2hex(entity.getPos()))))
+            {
                 closest.add(entity);
             }
         }
