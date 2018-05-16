@@ -16,7 +16,7 @@ import java.awt.*;
 /**
  * Created by py17334 on 15/05/2018.
  */
-public class AutoBuild extends BuildAction{
+public class AutoBuild extends BuildAction {
 
     @ObjectDef("AutoBuild")
     public AutoBuild(EntityType type) {
