@@ -9,6 +9,6 @@
   "ruleFileName":"game-rules.json",
   "rules":[
     "KeepAlive[abstract_base:1]",
-    "MostOfEntityForTurns[abstract_tower:20]"
+    "MostOfEntityForTurns[abstract_tower:200]"
   ]
 }

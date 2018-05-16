@@ -2,7 +2,7 @@
   {
     "name":"abstract_soldier",
     "properties": {
-      "movement":1,
+      "movement":2,
       "health":1,
       "attackRange": 1,
       "atkMelee":1,
@@ -12,7 +12,7 @@
       "energy":10
     },
     "_actions":[
-      "Wrapper[MeleeAttackAction]",
+      "Wrapper[Attack]",
       "Wrapper[Move]"
     ]
   },
@@ -44,6 +44,7 @@
     "name": "abstract_tower",
     "properties": {
       "health": 1,
+      "ter-grass": 1,
       "has_passive": 1
     },
     "cost": {
@@ -65,16 +66,5 @@
     "_actions": [
       "AutoGenerate[energy:10]"
     ]
-  },
-  {
-    "name": "abstract_towerhalf",
-    "properties": {
-      "health": 1,
-      "ter-grass": 1,
-      "has_passive": 1
-    },
-    "cost": {
-      "energy": 1
-    }
   }
 ]

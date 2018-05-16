@@ -3,7 +3,7 @@
     "name": "minerals",
     "_extends":"abstract_minerals",
     "_actions": [
-      "Generate[energy:5]"
+      "Generate[energy:10]"
     ]
   },
   {
@@ -31,7 +31,7 @@
 
     },
     "_actions":[
-      "Wrapper[Build[Red_TowerHalf]]"
+      "Wrapper[Build[Red_Tower]]"
     ]
   },
   {
@@ -45,29 +45,7 @@
 
     },
     "_actions":[
-      "Wrapper[Build[Blue_TowerHalf]]"
-    ]
-  },
-  {
-    "name": "Red_TowerHalf",
-    "_extends":"abstract_towerhalf",
-    "sprite": {
-      "image": "RedTowerHalf",
-      "scale" : 0.5
-    },
-    "_actions": [
-      "AutoBuild[Red_Tower]"
-    ]
-  },
-  {
-    "name": "Blue_TowerHalf",
-    "_extends":"abstract_towerhalf",
-    "sprite": {
-      "image": "BlueTowerHalf",
-      "scale" : 0.5
-    },
-    "_actions": [
-      "AutoBuild[Blue_Tower]"
+      "Wrapper[Build[Blue_Tower]]"
     ]
   },
   {
@@ -108,7 +86,6 @@
     "_actions":[
       "Build[Blue_Builder]",
       "Build[Blue_Soldier]"
-
     ]
   }
 ]
