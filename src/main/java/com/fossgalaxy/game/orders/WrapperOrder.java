@@ -18,12 +18,10 @@ public class WrapperOrder implements Order {
     public void doOrder(Entity host, GameState state) {
         actualOrder.doOrder(host, state);
 
-        for (Entity entity : state.getOwnedEntities(host.getOwner())) {
-           for (GameAction action : entity.getType().getAvailableActions()) {
-               if (action != null && action.canAutomate() && action instanceof WrapperAction) {
-                   action.generateOrder(host.getPos(), state).doOrder(entity, state);
-               }
+       for (GameAction action : host.getType().getAvailableActions()) {
+           if (action != null && action.canAutomate() && !(action instanceof WrapperAction)) {
+               action.generateOrder(host.getPos(), state).doOrder(host, state);
            }
-        }
+       }
     }
 }

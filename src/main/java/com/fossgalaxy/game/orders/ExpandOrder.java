@@ -22,13 +22,14 @@ public class ExpandOrder implements Order {
         List<CubeCoordinate> grounds = new ArrayList<>();
         List<CubeCoordinate> occuppied = new ArrayList<>();
 
-        List<Entity> closest = new ArrayList();
+        List<Entity> closest = new ArrayList<>();
 
         for (Entity entity : state.getOwnedEntities(host.getOwner())) {
-            if (entity.getType().equals(host.getType()) && !entity.equals(host) && state.getCalc().isVisible(state.cube2hex(host.getPos()), state.cube2hex(entity.getPos()))) {
+            if (entity.getType().getName().endsWith("_Base") || entity.getType().equals(host.getType()) && !entity.equals(host) && state.getCalc().isVisible(state.cube2hex(host.getPos()), state.cube2hex(entity.getPos()))) {
                 closest.add(entity);
             }
         }
+
         if (closest.size() < 2) {
             return;
         }
@@ -37,10 +38,10 @@ public class ExpandOrder implements Order {
             state.getDistance(host.getPos(), a.getPos()) < state.getDistance(host.getPos(), b.getPos()) ? -1 : 1
         ));
         TerrainType walkable = state.getSettings().getTerrainType("walkable");
-        TerrainType hostTerrainType = state.getSettings().getTerrainType(host.getType().getName().substring(0, host.getType().getName().indexOf("_") -1));
+        TerrainType hostTerrainType = state.getSettings().getTerrainType((host.getOwner() == 0 ? "blue" : "red") + "_tile");
 
         // Only process closest 2
-        for (Entity entity : closest.subList(0, 1)) {
+        for (Entity entity : closest) {
             state.getCalc().drawLine(state.cube2hex(host.getPos()), state.cube2hex(entity.getPos())).forEach((tile) -> {
                 // Get all ground & contestable tiles
                 if (state.getTerrainAt(tile.getCubeCoordinate()).equals(walkable) && !grounds.contains(tile.getCubeCoordinate())) {
@@ -64,8 +65,10 @@ public class ExpandOrder implements Order {
                 });
             }
         }
+
+        System.out.println("Tiles: " + grounds.size());
         // assign terrains
-        for (int m = 0; m < quantityPerTurn; m++) {
+        for (int m = 0; m < quantityPerTurn && m < grounds.size(); m++) {
             state.setTerrainAt(grounds.get(m), hostTerrainType);
         }
     }

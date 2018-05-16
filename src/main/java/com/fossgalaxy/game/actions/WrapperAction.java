@@ -18,9 +18,6 @@ public class WrapperAction extends AbstractAction {
     @ObjectDef("Wrapper")
     public WrapperAction(GameAction actualAction) {
         this.actualAction = actualAction;
-        System.out.println(actualAction.getClass());
-
-       //toString = actualAction.toString();
     }
 
     public boolean isPossible(Entity var1, GameState var2) { return actualAction.isPossible(var1, var2); }

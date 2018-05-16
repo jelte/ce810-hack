@@ -19,7 +19,7 @@
   {
     "name":"abstract_civilian",
     "properties": {
-      "movement":1,
+      "movement":2,
       "health":1,
       "ter-grass":1
     },
@@ -47,23 +47,23 @@
       "has_passive": 1
     },
     "cost": {
-      "energy": 0
+
     },
     "_actions": [
-      "Expand[1]"
+      "Expand[100]"
     ]
   },
   {
     "name": "abstract_base",
     "properties": {
-      "health": 1,
+      "health": 10,
       "has_passive": 1
     },
     "cost": {
       "energy": 0
     },
     "_actions": [
-      "Generate[energy:1]"
+      "AutoGenerate[energy:10]"
     ]
   },
   {
