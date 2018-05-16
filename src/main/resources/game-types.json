@@ -24,7 +24,8 @@
     "name": "Red_Builder",
     "_extends": "abstract_civilian",
     "sprite": {
-      "image": "RedBuilder"
+      "image": "RedBuilder",
+      "scale" : 0.5
     },
     "cost":{
 
@@ -37,7 +38,8 @@
     "name": "Blue_Builder",
     "_extends":"abstract_civilian",
     "sprite": {
-      "image": "BlueBuilder"
+      "image": "BlueBuilder",
+      "scale" : 0.5
     },
     "cost":{
 
@@ -89,7 +91,7 @@
     "_extends":"abstract_base",
     "sprite" : {
       "image" : "RedBase",
-      "scale" : 0.8
+      "scale" : 0.4
     },
     "_actions":[
       "Build[Red_Builder]",
@@ -101,7 +103,7 @@
     "_extends":"abstract_base",
     "sprite": {
       "image": "BlueBase",
-      "scale": 0.8
+      "scale": 0.4
     },
     "_actions":[
       "Build[Blue_Builder]",
