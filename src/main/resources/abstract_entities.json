@@ -56,7 +56,7 @@
   {
     "name": "abstract_base",
     "properties": {
-      "health": 1,
+      "health": 10,
       "has_passive": 1
     },
     "cost": {
