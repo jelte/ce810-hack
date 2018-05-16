@@ -53,7 +53,7 @@
     "_extends":"abstract_towerhalf",
     "sprite": {
       "image": "RedTowerHalf",
-      "scale" : 0.8
+      "scale" : 0.5
     },
     "_actions": [
       "AutoBuild[Red_Tower]"
@@ -64,7 +64,7 @@
     "_extends":"abstract_towerhalf",
     "sprite": {
       "image": "BlueTowerHalf",
-      "scale" : 0.8
+      "scale" : 0.5
     },
     "_actions": [
       "AutoBuild[Blue_Tower]"
@@ -75,7 +75,7 @@
     "_extends":"abstract_tower",
     "sprite": {
       "image": "RedTower",
-      "scale" : 0.8
+      "scale" : 0.5
     }
   },
   {
@@ -83,7 +83,7 @@
     "_extends":"abstract_tower",
     "sprite": {
       "image": "BlueTower",
-      "scale" : 0.8
+      "scale" : 0.5
     }
   },
   {
