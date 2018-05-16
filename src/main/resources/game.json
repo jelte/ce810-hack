@@ -8,6 +8,7 @@
   "aiFileName":"game-ai.json",
   "ruleFileName":"game-rules.json",
   "rules":[
-    "LastManStanding"
+    "KeepAlive[abstract_base:1]",
+    "MostOfEntityForTurns[abstract_tower:20]"
   ]
 }
