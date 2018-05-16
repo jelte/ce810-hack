@@ -1,6 +1,5 @@
 [
   {
-
     "name": "minerals",
     "_extends":"abstract_minerals",
     "_actions": [
@@ -11,14 +10,14 @@
     "name": "Red_soldier",
     "_extends": "abstract_soldier",
     "sprite": {
-      "image": "RedBuilder"
+      "image": "RedTank"
     }
   },
   {
     "name": "Blue_Soldier",
     "_extends": "abstract_soldier",
     "sprite": {
-      "image": "BlueBuilder"
+      "image": "BlueTank"
     }
   },
   {
@@ -27,30 +26,32 @@
     "sprite": {
       "image": "RedBuilder"
     },
+    "cost":{
+
+    },
     "_actions":[
-      "Build[Red_TowerHalf]"
+      "Build[RedTowerHalf]"
     ]
   },
   {
     "name": "Blue_Builder",
-    "_extends": "abstract_civilian",
+    "_extends":"abstract_civilian",
     "sprite": {
       "image": "BlueBuilder"
     },
-    "actions":[
+    "cost":{
+
+    },
+    "_actions":[
       "Build[Blue_TowerHalf]"
     ]
   },
   {
     "name": "Red_TowerHalf",
+    "_extends":"abstract_towerhalf",
     "sprite": {
-      "image": "Red_TowerHalf"
-    },
-    "properties": {
-      "health": 1
-    },
-    "cost": {
-      "energy": 0
+      "image": "RedTowerHalf",
+      "scale" : 0.8
     },
     "_actions": [
       "AutoBuild[Red_Tower]"
@@ -58,14 +59,10 @@
   },
   {
     "name": "Blue_TowerHalf",
+    "_extends":"abstract_towerhalf",
     "sprite": {
-      "image": "Blue_TowerHalf"
-    },
-    "properties": {
-      "health": 1
-    },
-    "cost": {
-      "energy": 0
+      "image": "BlueTowerHalf",
+      "scale" : 0.8
     },
     "_actions": [
       "AutoBuild[Blue_Tower]"
@@ -73,52 +70,34 @@
   },
   {
     "name": "Red_Tower",
+    "_extends":"abstract_tower",
     "sprite": {
-      "image": "Entities/Red_Tower"
-    },
-    "properties": {
-      "health": 1
-    },
-    "cost": {
-      "energy": 0
-    },
-    "_actions": [
-      "Expand[1]"
-    ]
-  },
-  {
-    "name": "Blue_Tower",
-    "sprite": {
-      "image": "Entities/Blue_Tower"
-    },
-    "properties": {
-      "health": 1
-    },
-    "cost": {
-      "energy": 0
-    },
-    "_actions": [
-      "Expand[1]"
-    ]
-  },
-  {
-    "name" : "red_base",
-    "sprite" : {
-      "image" : "RedBase",
+      "image": "RedTower",
       "scale" : 0.8
-    },
-    "properties" : {
-      "health" : 10
     }
   },
   {
-    "name": "blue_base",
+    "name": "Blue_Tower",
+    "_extends":"abstract_tower",
+    "sprite": {
+      "image": "BlueTower",
+      "scale" : 0.8
+    }
+  },
+  {
+    "name" : "Red_base",
+    "_extends":"abstract_base",
+    "sprite" : {
+      "image" : "RedBase",
+      "scale" : 0.8
+    }
+  },
+  {
+    "name": "Blue_base",
+    "_extends":"abstract_tower",
     "sprite": {
       "image": "BlueBase",
       "scale": 0.8
-    },
-    "properties": {
-      "health": 10
     }
   }
 ]
