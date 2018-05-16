@@ -30,7 +30,7 @@
 
     },
     "_actions":[
-      "Build[RedTowerHalf]"
+      "Wrapper[Build[Red_TowerHalf]]"
     ]
   },
   {
@@ -43,7 +43,7 @@
 
     },
     "_actions":[
-      "Build[Blue_TowerHalf]"
+      "Wrapper[Build[Blue_TowerHalf]]"
     ]
   },
   {

@@ -12,8 +12,8 @@
       "energy":10
     },
     "_actions":[
-      "MeleeAttackAction",
-      "Move"
+      "Wrapper[MeleeAttackAction]",
+      "Wrapper[Move]"
     ]
   },
   {
@@ -27,7 +27,7 @@
       "energy":10
     },
     "_actions":[
-      "Move"
+      "Wrapper[Move]"
     ]
   },
   {
@@ -43,7 +43,8 @@
   {
     "name": "abstract_tower",
     "properties": {
-      "health": 1
+      "health": 1,
+      "has_passive": 1
     },
     "cost": {
       "energy": 0
@@ -55,7 +56,8 @@
   {
     "name": "abstract_base",
     "properties": {
-      "health": 1
+      "health": 1,
+      "has_passive": 1
     },
     "cost": {
       "energy": 0
@@ -68,7 +70,8 @@
     "name": "abstract_towerhalf",
     "properties": {
       "health": 1,
-      "ter-grass": 1
+      "ter-grass": 1,
+      "has_passive": 1
     },
     "cost": {
       "energy": 1
