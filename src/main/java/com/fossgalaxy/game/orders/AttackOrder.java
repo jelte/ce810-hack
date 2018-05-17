@@ -19,10 +19,14 @@ public class AttackOrder extends com.fossgalaxy.games.tbs.order.AttackOrderMelee
     }
 
     public void doOrder(Entity entity, GameState state) {
-        if (state.getEntityByID(this.targetID) != null && state.getEntityByID(this.targetID).getType().getName().endsWith("_Tower")) {
-            clearTiles(state.getEntityByID(this.targetID), state);
+        Entity target = state.getEntityByID(this.targetID);
+        if (target != null && target.getType().getName().endsWith("_Tower")) {
+            clearTiles(target, state);
         }
         new AttackOrderMelee(targetID).doOrder(entity, state);
+        if (target != null && target.getHealth() <= 0) {
+            entity.setPos(target.getPos());
+        }
     }
 
     private void clearTiles(Entity host, GameState state)
