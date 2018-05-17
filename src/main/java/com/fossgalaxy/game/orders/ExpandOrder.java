@@ -45,6 +45,7 @@ public class ExpandOrder implements Order {
             // Only process closest 2
             for (Entity entity : closest) {
                 state.getCalc().drawLine(state.cube2hex(host.getPos()), state.cube2hex(entity.getPos())).forEach((tile) -> {
+                    if (state.getTerrainAt(tile.getCubeCoordinate()) == null) return;
                     // Get all ground & contestable tiles
                     if (state.getTerrainAt(tile.getCubeCoordinate()).equals(walkable) && !grounds.contains(tile.getCubeCoordinate())) {
                         grounds.add(tile.getCubeCoordinate());
@@ -74,8 +75,6 @@ public class ExpandOrder implements Order {
             for (int m = 0; m < quantityPerTurn && m < grounds.size(); m++) {
                 state.setTerrainAt(grounds.get(m), hostTerrainType);
             }
-
-        } catch (NoSuchElementException e) {
-        }
+        } catch (NoSuchElementException e) {}
     }
 }

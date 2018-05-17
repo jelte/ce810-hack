@@ -54,6 +54,7 @@ public class AttackOrder extends com.fossgalaxy.games.tbs.order.AttackOrderMelee
             for (int i = 0; i < 2; i++) {
                 Entity entity = closest.get(i);
                 state.getCalc().drawLine(state.cube2hex(host.getPos()), state.cube2hex(entity.getPos())).forEach((tile) -> {
+                    if (state.getTerrainAt(tile.getCubeCoordinate()) == null) return;
                     // Get all ground & contestable tiles
                     if (state.getTerrainAt(tile.getCubeCoordinate()).equals(hostTerrainType) && !grounds.contains(tile.getCubeCoordinate())) {
                         grounds.add(tile.getCubeCoordinate());
