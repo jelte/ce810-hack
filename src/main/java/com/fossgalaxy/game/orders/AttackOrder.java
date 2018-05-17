@@ -81,7 +81,9 @@ public class AttackOrder extends com.fossgalaxy.games.tbs.order.AttackOrderMelee
 
             // assign terrains
             for (int m = 0; m < grounds.size(); m++) {
-                state.setTerrainAt(grounds.get(m), walkable);
+                if (state.getEntityAt(grounds.get(m)) == null || state.getEntityAt(grounds.get(m)).getType().getName().endsWith("Tower")) {
+                    state.setTerrainAt(grounds.get(m), walkable);
+                }
             }
         } catch (NoSuchElementException e) {}
     }
