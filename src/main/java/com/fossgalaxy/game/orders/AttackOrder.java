@@ -45,13 +45,14 @@ public class AttackOrder extends com.fossgalaxy.games.tbs.order.AttackOrderMelee
             }
             // sort by distance
             closest.sort((a, b) -> (
-                state.getDistance(host.getPos(), a.getPos()) < state.getDistance(host.getPos(), b.getPos()) ? 1 : -1
+                state.getDistance(host.getPos(), a.getPos()) < state.getDistance(host.getPos(), b.getPos()) ? -1 : 1
             ));
             TerrainType walkable = state.getSettings().getTerrainType("walkable");
             TerrainType hostTerrainType = state.getSettings().getTerrainType((host.getOwner() == 0 ? "blue" : "red") + "_tile");
 
             // Only process closest 2
-            for (Entity entity : closest) {
+            for (int i = 0; i < 2; i++) {
+                Entity entity = closest.get(i);
                 state.getCalc().drawLine(state.cube2hex(host.getPos()), state.cube2hex(entity.getPos())).forEach((tile) -> {
                     // Get all ground & contestable tiles
                     if (state.getTerrainAt(tile.getCubeCoordinate()).equals(hostTerrainType) && !grounds.contains(tile.getCubeCoordinate())) {

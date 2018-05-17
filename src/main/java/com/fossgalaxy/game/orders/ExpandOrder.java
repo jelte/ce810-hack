@@ -37,7 +37,7 @@ public class ExpandOrder implements Order {
             }
             // sort by distance
             closest.sort((a, b) -> (
-                    state.getDistance(host.getPos(), a.getPos()) < state.getDistance(host.getPos(), b.getPos()) ? 1 : -1
+                    state.getDistance(host.getPos(), a.getPos()) < state.getDistance(host.getPos(), b.getPos()) ? -1 : 1
             ));
             TerrainType walkable = state.getSettings().getTerrainType("walkable");
             TerrainType hostTerrainType = state.getSettings().getTerrainType((host.getOwner() == 0 ? "blue" : "red") + "_tile");
