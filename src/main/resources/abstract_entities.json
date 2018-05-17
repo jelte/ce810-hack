@@ -2,7 +2,7 @@
   {
     "name":"abstract_soldier",
     "properties": {
-      "movement":2,
+      "movement":3,
       "health":1,
       "attackRange": 1,
       "atkMelee":1,
@@ -48,7 +48,7 @@
       "has_passive": 1
     },
     "cost": {
-
+      "energy": 1
     },
     "_actions": [
       "Expand[100]"
