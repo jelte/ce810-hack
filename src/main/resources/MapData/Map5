@@ -2058,11 +2058,11 @@
     ]
   },
   "startingResources": {
-    "0": {
-      "energy": 5
-    },
-    "1": {
-      "energy": 5
+      "0": {
+        "energy": 5
+      },
+      "1": {
+        "energy": 5
+      }
     }
-  }
 }
