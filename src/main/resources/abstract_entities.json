@@ -44,7 +44,7 @@
     "name": "abstract_tower",
     "properties": {
       "health": 1,
-      "ter-grass": 1,
+      "ter-buildable": 1,
       "has_passive": 1
     },
     "cost": {

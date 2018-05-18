@@ -3,5 +3,17 @@
     "name": "energy",
     "color": "238,244,66",
     "image": "energy"
+  },
+
+  {
+    "name": "tiles_blue",
+    "color": "0,255,0",
+    "image": "energy"
+  },
+
+  {
+    "name": "tiles_red",
+    "color": "255,0,0",
+    "image": "energy"
   }
 ]

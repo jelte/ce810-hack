@@ -2,6 +2,7 @@ package com.fossgalaxy.game;
 
 import com.fossgalaxy.games.tbs.GameState;
 import com.fossgalaxy.games.tbs.entity.Entity;
+import com.fossgalaxy.games.tbs.parameters.ResourceType;
 import com.fossgalaxy.games.tbs.parameters.TerrainType;
 import org.codetome.hexameter.core.api.CubeCoordinate;
 
@@ -65,6 +66,7 @@ public class TileClearer {
                 }
             }
 
+            ResourceType tiles = state.getSettings().getResourceType("tiles_"+(host.getOwner() == 0?"blue":"red"));
             // assign terrains
             for (int m = 0; m < grounds.size(); m++) {
                 if (
@@ -76,6 +78,8 @@ public class TileClearer {
                                 )
                 ) {
                     state.setTerrainAt(grounds.get(m), walkable);
+                    state.setResource(0, tiles, state.getResource(0, tiles) - 1);
+                    state.setResource(1, tiles, state.getResource(1, tiles) - 1);
                 }
             }
         } catch (NoSuchElementException e) {}
