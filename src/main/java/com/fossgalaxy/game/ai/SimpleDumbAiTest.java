@@ -7,6 +7,7 @@ import com.fossgalaxy.games.tbs.order.BuildOrder;
 import com.fossgalaxy.games.tbs.parameters.EntityType;
 import com.fossgalaxy.games.tbs.ui.GameAction;
 import com.fossgalaxy.object.annotations.ObjectDef;
+import com.sun.javafx.geom.Vec2d;
 import org.codetome.hexameter.core.api.CubeCoordinate;
 import rts.PlayerAction;
 import rts.ai.abstraction.AbstractionLayerAI;
@@ -188,9 +189,6 @@ public class SimpleDumbAiTest  extends AbstractionLayerAI{
 
         if (workers.isEmpty()) return;
 
-        //we've pre-calculated number of bases, using that to save a little time...
-
-
         //if we have free workers and no bases, we should build a base.
         if (nbases==0 && !freeWorkers.isEmpty()) {
             Entity worker = freeWorkers.poll();
@@ -200,6 +198,7 @@ public class SimpleDumbAiTest  extends AbstractionLayerAI{
         //build towers forever
         if (!freeWorkers.isEmpty()) {
             Entity worker = freeWorkers.poll();
+            //use buildTower function. Not yet implemented
             buildIfNotAlreadyBuilding(worker, towerType, gs);
         }
 
@@ -217,6 +216,28 @@ public class SimpleDumbAiTest  extends AbstractionLayerAI{
         }
 
 
+    }
+    //TODO Get a distance from tiles, workers are not moving, game ends after building initial towers.
+    public void buildTower(Entity worker,GameState gs){
+        //we've pre-calculated number of bases, using that to save a little time...
+        List<Vec2d> blues = null;
+        List<Vec2d> reds = null;
+        List<Vec2d> whites = null;
+        for (int x = 0; x < gs.getWidth(); x++) {
+            for (int z = 0; z < gs.getHeight(); z++) {
+                try {
+                    if(gs.getTerrainAt(CubeCoordinate.fromCoordinates(x, z)).getName().startsWith("blue")? true:false){
+                        blues.add(new Vec2d(x,z));
+                    }
+                    if(gs.getTerrainAt(CubeCoordinate.fromCoordinates(x, z)).getName().startsWith("red")? true:false){
+                        reds.add(new Vec2d(x,z));
+                    }
+                } catch (Exception e) {}
+            }
+        }//TODO see if blues and reds exist, get the closest one, move towards closest white tile?
+        if(blues != null){
+
+        }
     }
 
 
