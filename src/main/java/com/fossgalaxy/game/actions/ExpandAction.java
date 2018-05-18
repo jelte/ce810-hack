@@ -17,7 +17,7 @@ public class ExpandAction extends AbstractAction {
     private final int quantityPerTurn;
     private final String toString;
 
-    @ObjectDef("Expand")
+    @ObjectDef(".Expand")
     public ExpandAction(int quantityPerTurn) {
         this.quantityPerTurn = quantityPerTurn;
         toString = String.format("Expand %d", quantityPerTurn);
