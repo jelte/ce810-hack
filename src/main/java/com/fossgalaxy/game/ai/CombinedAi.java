@@ -1,5 +1,6 @@
 package com.fossgalaxy.game.ai;
 
+import com.fossgalaxy.game.orders.AttackOrder;
 import com.fossgalaxy.games.tbs.GameState;
 import com.fossgalaxy.games.tbs.entity.Entity;
 import com.fossgalaxy.games.tbs.entity.HexagonTile;
@@ -135,6 +136,7 @@ public class CombinedAi extends AbstractionLayerAI{
      * @param p the current player
      * @param pgs the game state
      */
+
     public void unitBehavior(Entity unit, int p, GameState pgs) {
         Entity closestEnemy = null;
         double closestDistance = Double.MAX_VALUE;
@@ -160,6 +162,12 @@ public class CombinedAi extends AbstractionLayerAI{
 
         if (closestEnemy != null) {
             attack(unit, closestEnemy, pgs);
+            double dist = (double)pgs.getDistance(unit.getPos(), closestEnemy.getPos());
+            if(dist > 1.0D) {
+                this.moveTowards(unit, closestEnemy.getPos(), pgs);
+            } else {
+                this.actions.put(unit.getID(), new AttackOrder(closestEnemy.getID()));
+            }
         }
 
     }

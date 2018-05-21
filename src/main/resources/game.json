@@ -9,6 +9,6 @@
   "ruleFileName":"game-rules.json",
   "rules":[
     "KeepAlive[abstract_base:1]",
-    "MostTiles[100]"
+    "MostTiles[500]"
   ]
 }
