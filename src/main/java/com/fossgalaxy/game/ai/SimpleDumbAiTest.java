@@ -29,24 +29,26 @@ public class SimpleDumbAiTest  extends AbstractionLayerAI{
     private final EntityType baseType;
     private final EntityType towerType;
     private final EntityType prodType;
+    private final EntityType tankType;
 
     // Strategy implemented by this class:
     // If we have more than 1 "Worker": send the extra workers to attack to the nearest enemy unit
     // If we have a base: train workers non-stop
     // If we have a worker: do this if needed: build base, harvest resources
     @ObjectDef("SimpleTact")
-    public SimpleDumbAiTest(EntityType baseType, EntityType towerType, EntityType workerType, EntityType unitType, EntityType prodType) {
+    public SimpleDumbAiTest(EntityType baseType, EntityType towerType, EntityType workerType, EntityType unitType, EntityType prodType, EntityType tankType) {
         this.baseType = baseType;
         this.workerType = workerType;
         this.unitType = unitType;
         this.towerType = towerType;
         this.prodType = prodType;
+        this.tankType = tankType;
         this.workerTowerDistance = 5;
     }
 
     @ObjectDef("SimpleTactP")
-    public SimpleDumbAiTest(EntityType baseType, EntityType towerType, EntityType workerType, EntityType prodType) {
-        this(baseType,towerType, workerType, workerType,prodType);
+    public SimpleDumbAiTest(EntityType baseType, EntityType towerType, EntityType workerType, EntityType prodType, EntityType tankType) {
+        this(baseType,towerType, workerType, workerType,prodType, tankType);
     }
 
     public void reset() {
@@ -55,7 +57,7 @@ public class SimpleDumbAiTest  extends AbstractionLayerAI{
 
 
     public AI clone() {
-        return new SimpleDumbAiTest(baseType,towerType,workerType, unitType,prodType);
+        return new SimpleDumbAiTest(baseType,towerType,workerType, unitType,prodType, tankType);
     }
 
     public PlayerAction getAction(int player, GameState rgs) {
@@ -69,10 +71,11 @@ public class SimpleDumbAiTest  extends AbstractionLayerAI{
         List<Entity> bases = map.getOrDefault(baseType, Collections.emptyList());
         List<Entity> workers = map.getOrDefault(workerType, Collections.emptyList());
         List<Entity> towers = map.getOrDefault(towerType,Collections.emptyList());
+        List<Entity> tanks = map.getOrDefault(tankType,Collections.emptyList());
 
         //we can change this amount of workers by team.
         for (Entity base : bases) {
-            baseBehavior(base, player, workers, rgs);
+            baseBehavior(base, player, workers, rgs, tanks);
 
         }
         //in this case we would put the actual base in the prod type
@@ -81,13 +84,12 @@ public class SimpleDumbAiTest  extends AbstractionLayerAI{
             prodBehavior(prod, player, rgs);
         }
 
-        /*this should be the tanks.
-        List<Entity> units = map.get(unitType);
-        if (units != null) {
-            for (Entity unit : units) {
-                unitBehavior(unit, player, rgs);
+        *///this should be the tanks.
+        if (tanks != null) {
+            for (Entity tank : tanks) {
+                unitBehavior(tank, player, rgs);
             }
-        }*/
+        }
 
         workersBehavior(workers,towers,bases.get(0), rgs);
 
@@ -113,12 +115,17 @@ public class SimpleDumbAiTest  extends AbstractionLayerAI{
     }
 
 
-    public void baseBehavior(Entity base, int player,List<Entity> workers, GameState pgs) {
+    public void baseBehavior(Entity base, int player, List<Entity> workers, GameState pgs, List<Entity> tanks) {
         //check removed - we don't care...
 
         if (workers.size() < 3) {
             if (canAfford(workerType, pgs, player)) {
                 train(base, workerType, pgs);
+            }
+        }
+        if(tanks.size() < 5){
+            if (canAfford(tankType, pgs, player)) {
+                train(base, tankType, pgs);
             }
         }
     }
@@ -139,17 +146,27 @@ public class SimpleDumbAiTest  extends AbstractionLayerAI{
 
         Collection<Entity> allEntities = pgs.getEntities();
         for (Entity entity : allEntities) {
-            if (entity.getOwner() == p) {
+            if (entity.getOwner() == p) { // if the entity belongs to player p then skip
                 continue;
             }
+//            EntityType checkType = ;
+//
+//            if (entity.getType() != checkString) {
+//                System.out.println(entity.getType().toString());
+//                continue;
+//            }
+
+
+
 
             CubeCoordinate theirPos = entity.getPos();
 
             double dist = pgs.getDistance(myPos, theirPos);
-            if (closestDistance > dist) {
-                closestEnemy = entity;
-                closestDistance = dist;
-            }
+                if (closestDistance > dist) {
+                    closestEnemy = entity;
+                    closestDistance = dist;
+                    }
+
 
         }
 
