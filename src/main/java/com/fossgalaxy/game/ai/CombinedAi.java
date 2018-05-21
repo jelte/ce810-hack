@@ -31,7 +31,7 @@ public class CombinedAi extends AbstractionLayerAI{
     // If we have more than 1 "Worker": send the extra workers to attack to the nearest enemy unit
     // If we have a base: train workers non-stop
     // If we have a worker: do this if needed: build base, harvest resources
-    @ObjectDef("SimpleAI")
+    @ObjectDef("CombinedAi")
     public CombinedAi(EntityType baseType, EntityType towerType, EntityType workerType, EntityType unitType, EntityType prodType, EntityType tankType) {
         this.baseType = baseType;
         this.workerType = workerType;
@@ -41,7 +41,7 @@ public class CombinedAi extends AbstractionLayerAI{
         this.tankType = tankType;
     }
 
-    @ObjectDef("SimpleAiP")
+    @ObjectDef("CombinedAiP")
     public CombinedAi(EntityType baseType, EntityType towerType, EntityType workerType, EntityType prodType, EntityType tankType) {
         this(baseType,towerType, workerType, workerType,prodType, tankType);
     }
