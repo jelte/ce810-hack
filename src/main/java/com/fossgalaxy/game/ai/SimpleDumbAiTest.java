@@ -59,8 +59,8 @@ public class SimpleDumbAiTest  extends AbstractionLayerAI{
     }
 
     public PlayerAction getAction(int player, GameState rgs) {
+        reset();
         PlayerAction pa = new PlayerAction();
-
 
         // behavior of bases:
         Collection<Entity> entities = rgs.getOwnedEntities(player);
@@ -119,8 +119,6 @@ public class SimpleDumbAiTest  extends AbstractionLayerAI{
         if (workers.size() < 3) {
             if (canAfford(workerType, pgs, player)) {
                 train(base, workerType, pgs);
-            }else{
-
             }
         }
     }
