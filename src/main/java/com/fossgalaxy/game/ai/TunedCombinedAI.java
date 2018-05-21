@@ -223,7 +223,7 @@ public class TunedCombinedAI extends AbstractionLayerAI{
         }*/
 
         if (towers.size() == 1) {
-            if (gs.getDistance(worker.getPos(), towers.get(0).getPos()) >= 4+new Random().nextInt(4)) {
+            if (gs.getDistance(worker.getPos(), towers.get(0).getPos()) >= 3+new Random().nextInt(7)) {
                 if (buildTower(worker, gs)) {
                     return;
                 }
@@ -232,16 +232,16 @@ public class TunedCombinedAI extends AbstractionLayerAI{
             return;
         }
 
-        towers.sort((a, b) -> ( gs.getDistance(worker.getPos(), a.getPos()) < gs.getDistance(worker.getPos(), b.getPos()) ? -1 : 1 ));
-        if (gs.getDistance(worker.getPos(), towers.get(0).getPos()) >= 3+new Random().nextInt(3) && buildTower(worker, gs)) {
+        towers.sort((a, b) -> ( gs.getDistance(worker.getPos(), a.getPos()) - gs.getDistance(worker.getPos(), b.getPos()) ));
+        if (gs.getDistance(worker.getPos(), towers.get(0).getPos()) >= 3+new Random().nextInt(7) && buildTower(worker, gs)) {
             return;
         }
-        Set<Hexagon<HexagonTile>> s1 = gs.getCalc().calculateMovementRangeFrom(gs.cube2hex(towers.get(0).getPos()), 6);
-        Set<Hexagon<HexagonTile>> s2 = gs.getCalc().calculateMovementRangeFrom(gs.cube2hex(towers.get(1).getPos()), 6);
+        Set<Hexagon<HexagonTile>> s1 = gs.getCalc().calculateMovementRangeFrom(gs.cube2hex(towers.get(0).getPos()), 10);
+        Set<Hexagon<HexagonTile>> s2 = gs.getCalc().calculateMovementRangeFrom(gs.cube2hex(towers.get(1).getPos()), 10);
         List<Hexagon<HexagonTile>> tiles = new ArrayList<>();
         List<Hexagon<HexagonTile>> topTiles = new ArrayList<>();
         for (Hexagon<HexagonTile> t : s1) {
-            if (gs.getDistance(towers.get(0).getPos(), t.getCubeCoordinate()) >= 5) {
+            if (gs.getDistance(towers.get(0).getPos(), t.getCubeCoordinate()) >= 7) {
                 if (gs.getTerrainAt(t.getCubeCoordinate()).getName().toLowerCase().endsWith("walkable") && s2.contains(t) && !tiles.contains(t)) {
                     tiles.add(t);
                 }
@@ -251,8 +251,8 @@ public class TunedCombinedAI extends AbstractionLayerAI{
             return;
         }
         tiles.sort((a, b) -> (
-                gs.getDistance(towers.get(1).getPos(), a.getCubeCoordinate()) < gs.getDistance(towers.get(1).getPos(), b.getCubeCoordinate())
-                        ? 1 : -1 ));
+                gs.getDistance(towers.get(1).getPos(), b.getCubeCoordinate()) - gs.getDistance(towers.get(1).getPos(), a.getCubeCoordinate())
+        ));
         double topDistance = gs.getDistance(towers.get(1).getPos(), tiles.get(0).getCubeCoordinate());
         for (Hexagon<HexagonTile> t : tiles) {
             if (gs.getDistance(towers.get(1).getPos(),t.getCubeCoordinate()) == topDistance) {
