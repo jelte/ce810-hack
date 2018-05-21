@@ -1,4 +1,7 @@
 {
   "dumbBlue":"SimpleTact[Blue_base:Blue_Tower:Blue_Builder:Blue_base:Blue_Builder]",
-  "dumbRed":"SimpleTact[Red_base:Red_Tower:Red_Builder:Red_base:Red_Builder]"
+  "dumbRed":"SimpleTact[Red_base:Red_Tower:Red_Builder:Red_base:Red_Builder]",
+  "nmcts": "nmcts",
+  "uct":"UCT[500:-1:100:10:RandomBiasedAI:SqrtEvalCustom]",
+  "duct":"duct"
 }

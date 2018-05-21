@@ -94,8 +94,8 @@ public class TileClearer {
     private static void clearTile(CubeCoordinate coord, GameState state, ResourceType tiles, TerrainType walkable)
     {
         state.setTerrainAt(coord, walkable);
-        state.setResource(0, tiles, state.getResource(0, tiles) - 1);
-        state.setResource(1, tiles, state.getResource(1, tiles) - 1);
+        state.setResource(0, tiles, state.getResource(0, tiles) - 1 < 0 ? 0 : state.getResource(0, tiles) - 1);
+        state.setResource(1, tiles, state.getResource(1, tiles) - 1 < 0 ? 0 : state.getResource(1, tiles) - 1);
         convertedTiles.remove(coord);
     }
 
