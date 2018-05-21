@@ -224,7 +224,7 @@ public class CombinedAi extends AbstractionLayerAI{
             return;
         }
 
-        towers.sort((a, b) -> ( gs.getDistance(worker.getPos(), a.getPos()) < gs.getDistance(worker.getPos(), b.getPos()) ? -1 : 1 ));
+        towers.sort((a, b) -> ( gs.getDistance(worker.getPos(), a.getPos()) - gs.getDistance(worker.getPos(), b.getPos())));
         if (gs.getDistance(worker.getPos(), towers.get(0).getPos()) >= 3+new Random().nextInt(3) && buildTower(worker, gs)) {
             return;
         }
@@ -243,8 +243,7 @@ public class CombinedAi extends AbstractionLayerAI{
             return;
         }
         tiles.sort((a, b) -> (
-                gs.getDistance(towers.get(1).getPos(), a.getCubeCoordinate()) < gs.getDistance(towers.get(1).getPos(), b.getCubeCoordinate())
-                ? 1 : -1 ));
+                gs.getDistance(towers.get(1).getPos(), b.getCubeCoordinate()) - gs.getDistance(towers.get(1).getPos(), a.getCubeCoordinate())));
         double topDistance = gs.getDistance(towers.get(1).getPos(), tiles.get(0).getCubeCoordinate());
         for (Hexagon<HexagonTile> t : tiles) {
             if (gs.getDistance(towers.get(1).getPos(),t.getCubeCoordinate()) == topDistance) {
