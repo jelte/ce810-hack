@@ -2065,10 +2065,10 @@
   },
   "startingResources": {
     "0": {
-      "energy": 7
+      "energy": 25
     },
     "1": {
-      "energy": 12
+      "energy": 9
     }
   }
 }

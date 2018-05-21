@@ -51,8 +51,7 @@
       "energy": 1
     },
     "_actions": [
-      ".Expand[100]",
-      "SelfDestruct[0.0]"
+      ".Expand[100]"
     ]
   },
   {
