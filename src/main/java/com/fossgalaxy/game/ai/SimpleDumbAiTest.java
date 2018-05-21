@@ -2,13 +2,16 @@ package com.fossgalaxy.game.ai;
 
 import com.fossgalaxy.games.tbs.GameState;
 import com.fossgalaxy.games.tbs.entity.Entity;
+import com.fossgalaxy.games.tbs.entity.HexagonTile;
 import com.fossgalaxy.games.tbs.entity.Resource;
 import com.fossgalaxy.games.tbs.order.BuildOrder;
 import com.fossgalaxy.games.tbs.parameters.EntityType;
+import com.fossgalaxy.games.tbs.parameters.TerrainType;
 import com.fossgalaxy.games.tbs.ui.GameAction;
 import com.fossgalaxy.object.annotations.ObjectDef;
 import com.sun.javafx.geom.Vec2d;
 import org.codetome.hexameter.core.api.CubeCoordinate;
+import org.codetome.hexameter.core.api.Hexagon;
 import rts.PlayerAction;
 import rts.ai.abstraction.AbstractionLayerAI;
 import rts.ai.abstraction.ProRushTactics;
@@ -193,36 +196,53 @@ public class SimpleDumbAiTest  extends AbstractionLayerAI{
 
         if (workers.isEmpty()) return;
 
+
+
         // every worker
         Iterator<Entity> freeItr = freeWorkers.iterator();
+         boolean[] insideTowerRange = {true};
         while (freeItr.hasNext()) {
             Entity worker = freeItr.next();
-            //get a perimeter from the worker position
-            gs.getCalc().calculateRingFrom(gs.cube2hex(worker.getPos()),workerTowerDistance).forEach((tile) -> {
-                boolean insideTowerRange = false;
-
-                //if there is a tower inside the worker perimeter
-
-                for (Entity towerEntity: towers)
-                {
-                    if(towerEntity.getPos().equals(tile.getCubeCoordinate()))
-                    {
-                           moveAway(worker,towerEntity.getPos(),gs);
-                           freeItr.remove();
-                           insideTowerRange = true;
-                    }
-                }
-                if(towers.isEmpty()){
-                    moveAway(worker,base.getPos(),gs);
+            if(towers.size() == 0) {
+                // System.out.println(gs.getDistance(worker.getPos(),base.getPos()));
+                if (gs.getDistance(worker.getPos(), base.getPos()) > 4) {
+                    buildTower(worker, towers, gs);
                     freeItr.remove();
-                }else {
-                    if (!insideTowerRange) {
-                        buildTower(worker, towers, gs);
-                        freeItr.remove();
-                    }
+                } else {
+                    moveTowards(worker,CubeCoordinate.fromCoordinates(r.nextInt(6),r.nextInt(21)),gs);
+                    //moveAway(worker, base.getPos(), gs);
+                    freeItr.remove();
                 }
 
-            });
+            }
+
+            if(towers.size()>0){
+                insideTowerRange[0] = false;
+                //get a perimeter from the worker position
+                gs.getCalc().calculateRingFrom(gs.cube2hex(worker.getPos()),workerTowerDistance).forEach((tile) -> {
+
+                    //if there is a tower inside the worker perimeter
+
+                    for (Entity towerEntity: towers)
+                    {
+
+                        //if(towerEntity.getPos() == tile.getCubeCoordinate())
+                       if(gs.getDistance(towerEntity.getPos(), tile.getCubeCoordinate())<5){
+
+                            moveTowards(worker,CubeCoordinate.fromCoordinates(r.nextInt(21),r.nextInt(21)),gs);
+                            freeItr.remove();
+                            insideTowerRange[0] = true;
+
+                        }
+                    }
+                });
+                if (!insideTowerRange[0]) {
+                    buildTower(worker, towers, gs);
+                    freeItr.remove();
+                }
+            }
+
+
         }
 
 
@@ -230,14 +250,21 @@ public class SimpleDumbAiTest  extends AbstractionLayerAI{
 
     public void buildTower(Entity worker,List<Entity> towers ,GameState gs){
         //just build tower
-        final boolean[] building = {false};
-        gs.getCalc().calculateRingFrom(gs.cube2hex(worker.getPos()),1).forEach((tile) -> {
-
-            if(!building[0] && gs.getTerrainAt(tile.getCubeCoordinate()).equals(gs.getSettings().getTerrainType("walkable"))){
+        //System.out.println("buildTower");
+       /* gs.getCalc().calculateRingFrom(gs.cube2hex(worker.getPos()),2).forEach((tile) -> {
+            TerrainType check = gs.getTerrainAt(tile.getCubeCoordinate());
+            //System.out.println(check.getName());
+            if(check.getName() == "walkable"){
                 build(worker,towerType,tile.getCubeCoordinate());
-                building[0] = true;
             }
-        });
+        });*/
+        for (Hexagon<HexagonTile> tile : gs.getCalc().calculateMovementRangeFrom(gs.cube2hex(worker.getPos()), 1)) {
+            if (gs.getTerrainAt(tile.getCubeCoordinate()).getName().toLowerCase().endsWith("walkable") && gs.getEntityAt(tile.getCubeCoordinate()) == null) {
+                build(worker, towerType, tile.getCubeCoordinate());
+
+            }
+        }
+
 
         //buildIfNotAlreadyBuilding(worker, towerType, gs);
     }
