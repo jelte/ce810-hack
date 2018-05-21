@@ -1,9 +1,11 @@
 {
-  "dumbBlue":"SimpleTact[Blue_base:Blue_Tower:Blue_Builder:Blue_base:Blue_Builder:Blue_Soldier]",
-  "dumbRed":"SimpleTact[Red_base:Red_Tower:Red_Builder:Red_base:Red_Builder:Red_Soldier]",
+  "dumbBlue":"SimpleTact[Blue_base:Blue_Tower:Blue_Builder:Blue_Soldier:Blue_base]",
+  "dumbRed":"SimpleTact[Red_base:Red_Tower:Red_Builder:Red_Soldier:Red_base]",
   "nmcts": "nmcts",
   "uct":"UCT[100:-1:100:10:RandomBiasedAI:SqrtEvalCustom]",
   "duct":"duct",
   "combBlue":"CombinedAi[Blue_base:Blue_Tower:Blue_Builder:Blue_base:Blue_Builder:Blue_Soldier]",
-  "combRed":"CombinedAi[Red_base:Red_Tower:Red_Builder:Red_base:Red_Builder:Red_Soldier]"
+  "combRed":"CombinedAi[Red_base:Red_Tower:Red_Builder:Red_base:Red_Builder:Red_Soldier]",
+  "tunedAiRed":"TunedAi[Red_base:Red_Tower:Red_Builder:Red_base:Red_Builder:Red_Soldier]",
+  "tunedAiBlue":"TunedAi[Blue_base:Blue_Tower:Blue_Builder:Blue_base:Blue_Builder:Blue_Soldier]"
 }
