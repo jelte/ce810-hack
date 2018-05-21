@@ -32,26 +32,25 @@ public class SimpleDumbAiTest  extends AbstractionLayerAI{
     private final EntityType baseType;
     private final EntityType towerType;
     private final EntityType prodType;
-    private final EntityType tankType;
+     Boolean insideTowerRange = true;
 
     // Strategy implemented by this class:
     // If we have more than 1 "Worker": send the extra workers to attack to the nearest enemy unit
     // If we have a base: train workers non-stop
     // If we have a worker: do this if needed: build base, harvest resources
     @ObjectDef("SimpleTact")
-    public SimpleDumbAiTest(EntityType baseType, EntityType towerType, EntityType workerType, EntityType unitType, EntityType prodType, EntityType tankType) {
+    public SimpleDumbAiTest(EntityType baseType, EntityType towerType, EntityType workerType, EntityType unitType, EntityType prodType) {
         this.baseType = baseType;
         this.workerType = workerType;
         this.unitType = unitType;
         this.towerType = towerType;
         this.prodType = prodType;
-        this.tankType = tankType;
         this.workerTowerDistance = 5;
     }
 
     @ObjectDef("SimpleTactP")
-    public SimpleDumbAiTest(EntityType baseType, EntityType towerType, EntityType workerType, EntityType prodType, EntityType tankType) {
-        this(baseType,towerType, workerType, workerType,prodType, tankType);
+    public SimpleDumbAiTest(EntityType baseType, EntityType towerType, EntityType workerType, EntityType prodType) {
+        this(baseType,towerType, workerType, workerType,prodType);
     }
 
     public void reset() {
@@ -60,7 +59,7 @@ public class SimpleDumbAiTest  extends AbstractionLayerAI{
 
 
     public AI clone() {
-        return new SimpleDumbAiTest(baseType,towerType,workerType, unitType,prodType, tankType);
+        return new SimpleDumbAiTest(baseType,towerType,workerType, unitType,prodType);
     }
 
     public PlayerAction getAction(int player, GameState rgs) {
@@ -74,11 +73,11 @@ public class SimpleDumbAiTest  extends AbstractionLayerAI{
         List<Entity> bases = map.getOrDefault(baseType, Collections.emptyList());
         List<Entity> workers = map.getOrDefault(workerType, Collections.emptyList());
         List<Entity> towers = map.getOrDefault(towerType,Collections.emptyList());
-        List<Entity> tanks = map.getOrDefault(tankType,Collections.emptyList());
+       // List<Entity> tanks = map.getOrDefault(tankType,Collections.emptyList());
 
         //we can change this amount of workers by team.
         for (Entity base : bases) {
-            baseBehavior(base, player, workers, rgs, tanks);
+            baseBehavior(base, player, workers, rgs);
 
         }
         //in this case we would put the actual base in the prod type
@@ -88,11 +87,11 @@ public class SimpleDumbAiTest  extends AbstractionLayerAI{
         }
 
         *///this should be the tanks.
-        if (tanks != null) {
+        /*if (tanks != null) {
             for (Entity tank : tanks) {
                 unitBehavior(tank, player, rgs);
             }
-        }
+        }*/
 
         workersBehavior(workers,towers,bases.get(0), rgs);
 
@@ -118,7 +117,7 @@ public class SimpleDumbAiTest  extends AbstractionLayerAI{
     }
 
 
-    public void baseBehavior(Entity base, int player, List<Entity> workers, GameState pgs, List<Entity> tanks) {
+    public void baseBehavior(Entity base, int player, List<Entity> workers, GameState pgs) {
         //check removed - we don't care...
 
         if (workers.size() < 3) {
@@ -126,11 +125,11 @@ public class SimpleDumbAiTest  extends AbstractionLayerAI{
                 train(base, workerType, pgs);
             }
         }
-        if(tanks.size() < 5){
+        /*if(tanks.size() < 5){
             if (canAfford(tankType, pgs, player)) {
                 train(base, tankType, pgs);
             }
-        }
+        }*/
     }
 
     /**
@@ -217,66 +216,64 @@ public class SimpleDumbAiTest  extends AbstractionLayerAI{
 
         // every worker
         Iterator<Entity> freeItr = freeWorkers.iterator();
-         boolean[] insideTowerRange = {true};
+
         while (freeItr.hasNext()) {
             Entity worker = freeItr.next();
             if(towers.size() == 0) {
                 // System.out.println(gs.getDistance(worker.getPos(),base.getPos()));
                 if (gs.getDistance(worker.getPos(), base.getPos()) > 4) {
                     buildTower(worker, towers, gs);
-                    freeItr.remove();
+
                 } else {
                     moveTowards(worker,CubeCoordinate.fromCoordinates(r.nextInt(6),r.nextInt(21)),gs);
                     //moveAway(worker, base.getPos(), gs);
-                    freeItr.remove();
+
                 }
 
             }
 
             if(towers.size()>0){
-                insideTowerRange[0] = false;
-                //get a perimeter from the worker position
-                gs.getCalc().calculateRingFrom(gs.cube2hex(worker.getPos()),workerTowerDistance).forEach((tile) -> {
+                if(build(towers,worker,gs)){
 
-                    //if there is a tower inside the worker perimeter
-
-                    for (Entity towerEntity: towers)
-                    {
-
-                        //if(towerEntity.getPos() == tile.getCubeCoordinate())
-                       if(gs.getDistance(towerEntity.getPos(), tile.getCubeCoordinate())<5){
-
-                            moveTowards(worker,CubeCoordinate.fromCoordinates(r.nextInt(21),r.nextInt(21)),gs);
-                            freeItr.remove();
-                            insideTowerRange[0] = true;
-
-                        }
-                    }
-                });
-                if (!insideTowerRange[0]) {
-                    buildTower(worker, towers, gs);
-                    freeItr.remove();
+                }else{
+                    moveTowards(worker,CubeCoordinate.fromCoordinates(r.nextInt(21),r.nextInt(21)),gs);
                 }
-            }
 
+            }
+            freeItr.remove();
 
         }
 
 
     }
+    public Boolean build(List<Entity> towers, Entity worker, GameState gs){
+
+        for (Hexagon<HexagonTile> tile : gs.getCalc().calculateRingFrom(gs.cube2hex(worker.getPos()), 5)) {
+            if (gs.getTerrainAt(tile.getCubeCoordinate()).getName().toLowerCase().endsWith("walkable")) {
+                if(towerDistanceToWorker(towers,worker,gs)){
+                    buildTower(worker, towers, gs);
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+
+    public  Boolean towerDistanceToWorker(List<Entity> towers,Entity worker, GameState gs) {
+        for (Entity tower : towers) {
+            if (gs.getDistance(tower.getPos(),worker.getPos()) <5 ) {
+                return false; //DON'T build
+            }
+        }
+        return true;
+    }
 
     public void buildTower(Entity worker,List<Entity> towers ,GameState gs){
-        //just build tower
-        //System.out.println("buildTower");
-       /* gs.getCalc().calculateRingFrom(gs.cube2hex(worker.getPos()),2).forEach((tile) -> {
-            TerrainType check = gs.getTerrainAt(tile.getCubeCoordinate());
-            //System.out.println(check.getName());
-            if(check.getName() == "walkable"){
-                build(worker,towerType,tile.getCubeCoordinate());
-            }
-        });*/
+
         for (Hexagon<HexagonTile> tile : gs.getCalc().calculateMovementRangeFrom(gs.cube2hex(worker.getPos()), 1)) {
             if (gs.getTerrainAt(tile.getCubeCoordinate()).getName().toLowerCase().endsWith("walkable") && gs.getEntityAt(tile.getCubeCoordinate()) == null) {
+
                 build(worker, towerType, tile.getCubeCoordinate());
 
             }
