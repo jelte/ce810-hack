@@ -37,7 +37,7 @@
       "energy": 10
     },
     "_actions":[
-      "Wrapper[Build[Red_Tower]]"
+      "Build[Red_Tower]"
     ]
   },
   {
@@ -51,7 +51,7 @@
       "energy": 10
     },
     "_actions":[
-      "Wrapper[Build[Blue_Tower]]"
+      "Build[Blue_Tower]"
     ]
   },
   {
