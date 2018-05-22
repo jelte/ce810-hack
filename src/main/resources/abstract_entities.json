@@ -9,7 +9,7 @@
       "ter-grass":1
     },
     "cost":{
-      "energy":10
+      "energy":20
     },
     "_actions":[
       "AttackA",
@@ -45,26 +45,28 @@
     "properties": {
       "health": 1,
       "ter-buildable": 1,
-      "has_passive": 1
+      "has_passive": 1,
+      "expandRate": 100
     },
     "cost": {
       "energy": 1
     },
     "_actions": [
-      ".Expand[100]"
+      ".Expand"
     ]
   },
   {
     "name": "abstract_base",
     "properties": {
       "health": 10,
-      "has_passive": 1
+      "has_passive": 1,
+      "generateRate": 10
     },
     "cost": {
       "energy": 0
     },
     "_actions": [
-      "AutoGenerate[energy:10]"
+      "AutoGenerate[energy]"
     ]
   }
 ]

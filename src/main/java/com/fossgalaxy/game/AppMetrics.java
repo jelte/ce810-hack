@@ -8,6 +8,7 @@ import com.fossgalaxy.games.tbs.io.SettingsIO;
 import com.fossgalaxy.games.tbs.metrics.AppEvolver;
 import com.fossgalaxy.games.tbs.metrics.GameMetrics;
 import com.fossgalaxy.games.tbs.metrics.TurnMetrics;
+import com.fossgalaxy.games.tbs.metrics.parameters.EntityCost;
 import com.fossgalaxy.games.tbs.metrics.parameters.EntityProp;
 import com.fossgalaxy.games.tbs.parameters.GameSettings;
 import io.jenetics.IntegerGene;
@@ -45,9 +46,15 @@ public class AppMetrics extends AppEvolver {
 
         //tweak the red knight's defence between 0 and 10 in steps of 1
         evo.addParameter(new EntityProp("abstract_base", "health", 5, 10, 1));
-        evo.addParameter(new EntityProp("abstract_tower", "health", 1, 5, 1));
+        evo.addParameter(new EntityProp("abstract_base", "generateRate", 2, 15, 1));
+        evo.addParameter(new EntityProp("abstract_tower", "health", 1, 2, 1));
+        evo.addParameter(new EntityCost("abstract_tower", "energy", 1, 5, 1));
+        evo.addParameter(new EntityProp("abstract_tower", "expandRate", 10, 100, 1));
         evo.addParameter(new EntityProp("abstract_soldier", "movement", 2, 5, 1));
+        evo.addParameter(new EntityProp("abstract_soldier", "atkMelee", 1, 5, 1));
+        evo.addParameter(new EntityCost("abstract_soldier", "energy", 20, 50, 1));
         evo.addParameter(new EntityProp("abstract_civilian", "movement", 2, 5, 1));
+        evo.addParameter(new EntityCost("abstract_civilian", "energy", 10, 20, 1));
 
         /*
         END PARAMETERS
@@ -59,9 +66,15 @@ public class AppMetrics extends AppEvolver {
 
         //print out the settings the GA picked
         System.out.println(best.getEntityType("abstract_base").getProperty("health"));
+        System.out.println(best.getEntityType("abstract_base").getProperty("generateRate"));
         System.out.println(best.getEntityType("abstract_tower").getProperty("health"));
+        System.out.println(best.getEntityType("abstract_tower").getCosts().get("energy"));
+        System.out.println(best.getEntityType("abstract_tower").getProperty("expandRate"));
         System.out.println(best.getEntityType("abstract_soldier").getProperty("movement"));
+        System.out.println(best.getEntityType("abstract_soldier").getProperty("atkMelee"));
+        System.out.println(best.getEntityType("abstract_soldier").getCosts().get("energy"));
         System.out.println(best.getEntityType("abstract_civilian").getProperty("movement"));
+        System.out.println(best.getEntityType("abstract_civilian").getCosts().get("energy"));
 
         //then dump everything we tried to a CSV file...
         dumpToFile(evo, "logs/summary-"+System.currentTimeMillis()+".csv");

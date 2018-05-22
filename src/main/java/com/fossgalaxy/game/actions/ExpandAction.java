@@ -14,13 +14,11 @@ import java.awt.*;
 
 public class ExpandAction extends AbstractAction {
 
-    private final int quantityPerTurn;
     private final String toString;
 
     @ObjectDef(".Expand")
-    public ExpandAction(int quantityPerTurn) {
-        this.quantityPerTurn = quantityPerTurn;
-        toString = String.format("Expand %d", quantityPerTurn);
+    public ExpandAction() {
+        toString = "Expand";
     }
 
     @Override
@@ -30,7 +28,7 @@ public class ExpandAction extends AbstractAction {
 
     @Override
     public Order generateOrder(CubeCoordinate co, GameState s) {
-        return new ExpandOrder(quantityPerTurn);
+        return new ExpandOrder();
     }
 
     @Override

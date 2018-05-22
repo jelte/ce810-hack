@@ -14,14 +14,11 @@ import java.util.NoSuchElementException;
 
 public class ExpandOrder implements Order {
 
-    private final int quantityPerTurn;
-
-    public ExpandOrder(int quantityPerTurn) {
-        this.quantityPerTurn = quantityPerTurn;
+    public ExpandOrder() {
     }
 
     @Override
     public void doOrder(Entity host, GameState state) {
-        TileClearer.connect(host, state, quantityPerTurn);
+        TileClearer.connect(host, state, host.getProperty("expandRate", 100));
     }
 }

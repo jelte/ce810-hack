@@ -14,13 +14,11 @@ import org.codetome.hexameter.core.api.CubeCoordinate;
  */
 public class AutoGenerate extends GeneratorAction {
     private final ResourceType resourceType;
-    private final int quantityPerTurn;
 
     @ObjectDef("AutoGenerate")
-    public AutoGenerate(ResourceType type, int quantityPerTurn) {
-        super(type, quantityPerTurn);
+    public AutoGenerate(ResourceType type) {
+        super(type, 0);
         this.resourceType = type;
-        this.quantityPerTurn = quantityPerTurn;
     }
 
     @Override
@@ -29,7 +27,7 @@ public class AutoGenerate extends GeneratorAction {
     }
 
     public Order generateOrder(CubeCoordinate co, GameState s) {
-        return new AutoGenerateOrder(this.resourceType, this.quantityPerTurn);
+        return new AutoGenerateOrder(this.resourceType);
     }
 
 }

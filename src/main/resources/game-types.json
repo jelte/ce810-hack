@@ -11,9 +11,6 @@
     "_extends": "abstract_soldier",
     "sprite": {
       "image": "RedTank"
-    },
-    "cost": {
-      "energy": 20
     }
   },
   {
@@ -21,9 +18,6 @@
     "_extends": "abstract_soldier",
     "sprite": {
       "image": "BlueTank"
-    },
-    "cost": {
-      "energy": 20
     }
   },
   {
@@ -32,9 +26,6 @@
     "sprite": {
       "image": "RedBuilder",
       "scale" : 0.5
-    },
-    "cost":{
-      "energy": 10
     },
     "_actions":[
       "Build[Red_Tower]"
@@ -46,9 +37,6 @@
     "sprite": {
       "image": "BlueBuilder",
       "scale" : 0.5
-    },
-    "cost":{
-      "energy": 10
     },
     "_actions":[
       "Build[Blue_Tower]"
