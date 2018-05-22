@@ -76,8 +76,8 @@ public class AppMetrics extends AppEvolver {
      */
     public List<Predicate<? super EvolutionResult<IntegerGene, Double>>> getLimits() {
         return Arrays.asList(
-                Limits.byExecutionTime(Duration.ofMinutes(120)),
-                Limits.byFixedGeneration(100)
+                Limits.byExecutionTime(Duration.ofMinutes(10)),
+                Limits.byFixedGeneration(20)
         );
     }
 
@@ -100,7 +100,7 @@ public class AppMetrics extends AppEvolver {
         int draws = 0;
 
         String stageAgent = "combBlue"; // the GA might be better here, but we don't have that kind of time...
-        List<String> oppAgents = Arrays.asList("combRed", "uct");
+        List<String> oppAgents = Arrays.asList("combRed");
 
         boolean[] stageFirst = {true, false};
 

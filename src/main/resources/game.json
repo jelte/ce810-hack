@@ -1,6 +1,6 @@
 {
   "hexSize":60,
-  "turnLimit": 100,
+  "turnLimit": 500,
   "resourcesFileName":"game-resources.json",
   "terrainFileName":"game-terrain.json",
   "typeFiles":["game-types.json","abstract_entities.json"],

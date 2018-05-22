@@ -38,7 +38,7 @@ public class TileClearer {
             }
             // sort by distance
             closest.sort((a, b) -> (
-                    state.getDistance(host.getPos(), a.getPos()) < state.getDistance(host.getPos(), b.getPos()) ? -1 : 1
+                    state.getDistance(host.getPos(), a.getPos()) - state.getDistance(host.getPos(), b.getPos())
             ));
 
             // Only process closest 2
@@ -85,10 +85,6 @@ public class TileClearer {
             }
         } catch (NoSuchElementException e) {
         }
-
-        Collection<Entity> entities = state.getOwnedEntities(host.getOwner());
-        for (CubeCoordinate coord : convertedTiles) {
-        }
     }
 
     private static void clearTile(CubeCoordinate coord, GameState state, ResourceType tiles, TerrainType walkable)
@@ -96,7 +92,7 @@ public class TileClearer {
         state.setTerrainAt(coord, walkable);
         state.setResource(0, tiles, state.getResource(0, tiles) - 1 < 0 ? 0 : state.getResource(0, tiles) - 1);
         state.setResource(1, tiles, state.getResource(1, tiles) - 1 < 0 ? 0 : state.getResource(1, tiles) - 1);
-        convertedTiles.remove(coord);
+        //convertedTiles.remove(coord);
     }
 
     public static void connect(Entity host, GameState state, int quantityPerTurn)
@@ -118,7 +114,7 @@ public class TileClearer {
             }
             // sort by distance
             closest.sort((a, b) -> (
-                    state.getDistance(host.getPos(), a.getPos()) < state.getDistance(host.getPos(), b.getPos()) ? -1 : 1
+                state.getDistance(host.getPos(), a.getPos()) - state.getDistance(host.getPos(), b.getPos())
             ));
             TerrainType walkable = state.getSettings().getTerrainType("walkable");
             TerrainType hostTerrainType = state.getSettings().getTerrainType((host.getOwner() == 0 ? "blue" : "red") + "_tile");
@@ -172,7 +168,7 @@ public class TileClearer {
                 state.setTerrainAt(grounds.get(m), hostTerrainType);
                 state.setResource(0, tiles, state.getResource(0, tiles) + 1);
                 state.setResource(1, tiles, state.getResource(1, tiles) + 1);
-                TileClearer.convertedTiles.add(grounds.get(m));
+             //   TileClearer.convertedTiles.add(grounds.get(m));
             }
         } catch (NoSuchElementException e) {}
     }

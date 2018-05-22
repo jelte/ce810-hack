@@ -92,7 +92,9 @@ public class TunedCombinedAI extends AbstractionLayerAI{
 
         ArrayList<Entity> e = new ArrayList<>();
         e.addAll(towers);
-        e.add(bases.get(0));
+        if (bases.size() > 0) {
+            e.add(bases.get(0));
+        }
         workersBehavior(workers, e, rgs);
 
         return translateActions(player, rgs);

@@ -92,7 +92,9 @@ public class CombinedAi extends AbstractionLayerAI{
 
         ArrayList<Entity> e = new ArrayList<>();
         e.addAll(towers);
-        e.add(bases.get(0));
+        if (bases.size() > 0) {
+            e.add(bases.get(0));
+        }
         workersBehavior(workers, e, rgs);
 
         return translateActions(player, rgs);
@@ -210,11 +212,11 @@ public class CombinedAi extends AbstractionLayerAI{
 
     private void workerBehavior(Entity worker, List<Entity> towers, GameState gs) {
         // Move away from tanks
-        /*Entity closest = getClosestUnfriendly(worker, gs, unitType.getProperty("attackRange"));
+        Entity closest = getClosestUnfriendly(worker, gs, tankType.getProperty("attackRange"));
         if (closest != null) {
             moveAway(worker, closest.getPos(), gs);
             return;
-        }*/
+        }
 
         if (towers.size() == 1) {
             if (gs.getDistance(worker.getPos(), towers.get(0).getPos()) >= 3+new Random().nextInt(3)) {
@@ -252,7 +254,6 @@ public class CombinedAi extends AbstractionLayerAI{
                 topTiles.add(t);
             }
         }
-        System.out.println(topTiles.size());
         moveTowards(worker, topTiles.get(new Random().nextInt(topTiles.size())).getCubeCoordinate(), gs);
     }
 
