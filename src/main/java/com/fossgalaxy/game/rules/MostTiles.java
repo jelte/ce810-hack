@@ -31,8 +31,8 @@ public class MostTiles implements Rule {
         int total = state.getWidth() * state.getHeight();
         int totalResources = state.getResource(0, "energy") +state.getResource(1, "energy");
 
-        double scoreBlue = ((double) blue / total) + ((double) state.getResource(0, "energy") / totalResources);
-        double scoreRed = ((double) red / total) + ((double) state.getResource(1, "energy") / totalResources);
+        double scoreBlue = ((double) blue / total) + ((double) state.getResource(0, "energy") / totalResources)*.25;
+        double scoreRed = ((double) red / total) + ((double) state.getResource(1, "energy") / totalResources)*.25;
 
         System.out.println(scoreBlue + " - " + scoreRed);
         return scoreBlue == scoreRed ? NO_WINNER : (scoreBlue > scoreRed ? 0 : 1);

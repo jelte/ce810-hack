@@ -72,11 +72,6 @@ public class CombinedAi extends AbstractionLayerAI{
         List<Entity> towers = map.getOrDefault(towerType,Collections.emptyList());
         List<Entity> tanks = map.getOrDefault(tankType,Collections.emptyList());
 
-        //we can change this amount of workers by team.
-        for (Entity base : bases) {
-            baseBehavior(base, player, workers, rgs, tanks);
-
-        }
         //in this case we would put the actual base in the prod type
         List<Entity> prods = map.getOrDefault(prodType, Collections.emptyList());
         for (Entity prod : prods) {
@@ -96,6 +91,13 @@ public class CombinedAi extends AbstractionLayerAI{
             e.add(bases.get(0));
         }
         workersBehavior(workers, e, rgs);
+
+
+        //we can change this amount of workers by team.
+        for (Entity base : bases) {
+            baseBehavior(base, player, workers, rgs, tanks);
+
+        }
 
         return translateActions(player, rgs);
     }
