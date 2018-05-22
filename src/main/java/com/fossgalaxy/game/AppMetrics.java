@@ -125,8 +125,8 @@ public class AppMetrics extends AppEvolver {
                 for (boolean first : stageFirst) {
 
                     //figure out p1 and p2
-                    Controller p1 = first ? ai.buildAI(stageAgent, settings) : ai.buildAI(agent, settings);
-                    Controller p2 = first ? ai.buildAI(agent, settings) : ai.buildAI(stageAgent, settings);
+                    Controller p1 = first ? ai.buildAI(stageAgent, settings) : ai.buildAI(stageAgent, settings);
+                    Controller p2 = first ? ai.buildAI(agent, settings) : ai.buildAI(agent, settings);
 
                     Controller[] controllers = new Controller[]{
                             p1,
