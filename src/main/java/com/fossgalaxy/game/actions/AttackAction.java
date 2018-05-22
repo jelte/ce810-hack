@@ -8,7 +8,7 @@ import com.fossgalaxy.object.annotations.ObjectDef;
 import org.codetome.hexameter.core.api.CubeCoordinate;
 
 public class AttackAction extends com.fossgalaxy.games.tbs.actions.MeleeAttackAction {
-    @ObjectDef("Attack")
+    @ObjectDef("AttackA")
     public AttackAction() {
         super();
     }

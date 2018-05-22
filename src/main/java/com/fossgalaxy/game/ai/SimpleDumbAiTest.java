@@ -9,7 +9,6 @@ import com.fossgalaxy.games.tbs.parameters.EntityType;
 import com.fossgalaxy.games.tbs.parameters.TerrainType;
 import com.fossgalaxy.games.tbs.ui.GameAction;
 import com.fossgalaxy.object.annotations.ObjectDef;
-import com.sun.javafx.geom.Vec2d;
 import org.codetome.hexameter.core.api.CubeCoordinate;
 import org.codetome.hexameter.core.api.Hexagon;
 import rts.PlayerAction;
