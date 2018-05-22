@@ -1,6 +1,6 @@
 {
   "hexSize":60,
-  "turnLimit": 200,
+  "turnLimit": 1000,
   "resourcesFileName":"game-resources.json",
   "terrainFileName":"game-terrain.json",
   "typeFiles":["game-types.json","abstract_entities.json"],
@@ -9,6 +9,6 @@
   "ruleFileName":"game-rules.json",
   "rules":[
     "KeepAlive[abstract_base:1]",
-    "MostTiles[100]"
+    "MostTiles[500]"
   ]
 }
