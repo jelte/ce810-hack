@@ -44,12 +44,10 @@ public class AppMetrics extends AppEvolver {
          */
 
         //tweak the red knight's defence between 0 and 10 in steps of 1
-        evo.addParameter(new EntityProp("Blue_base", "health", 1, 10, 1));
-        evo.addParameter(new EntityProp("Red_base", "health", 1, 10, 1));
-
-        //tweak the blue archer's attack between 0 and 10 in steps of 2
-        evo.addParameter(new EntityProp("Red_Tower", "health", 1, 5, 1));
-        evo.addParameter(new EntityProp("Blue_Tower", "health", 1, 5, 1));
+        evo.addParameter(new EntityProp("abstract_base", "health", 5, 10, 1));
+        evo.addParameter(new EntityProp("abstract_tower", "health", 1, 5, 1));
+        evo.addParameter(new EntityProp("abstract_soldier", "movement", 2, 5, 1));
+        evo.addParameter(new EntityProp("abstract_civilian", "movement", 2, 5, 1));
 
         /*
         END PARAMETERS
@@ -60,10 +58,10 @@ public class AppMetrics extends AppEvolver {
         GameSettings best = evo.evolve(evo::evaluate);
 
         //print out the settings the GA picked
-        System.out.println(best.getEntityType("Blue_base").getProperty("health"));
-        System.out.println(best.getEntityType("Red_base").getProperty("health"));
-        System.out.println(best.getEntityType("Blue_Tower").getProperty("health"));
-        System.out.println(best.getEntityType("Red_Tower").getProperty("health"));
+        System.out.println(best.getEntityType("abstract_base").getProperty("health"));
+        System.out.println(best.getEntityType("abstract_tower").getProperty("health"));
+        System.out.println(best.getEntityType("abstract_soldier").getProperty("movement"));
+        System.out.println(best.getEntityType("abstract_civilian").getProperty("movement"));
 
         //then dump everything we tried to a CSV file...
         dumpToFile(evo, "logs/summary-"+System.currentTimeMillis()+".csv");
