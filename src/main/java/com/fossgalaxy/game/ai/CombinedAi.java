@@ -212,10 +212,10 @@ public class CombinedAi extends AbstractionLayerAI{
 
     private void workerBehavior(Entity worker, List<Entity> towers, GameState gs) {
         // Move away from tanks
-        Entity closest = getClosestUnfriendly(worker, gs, tankType.getProperty("attackRange"));
+        Entity closest = getClosestUnfriendly(worker, gs, tankType.getProperty("movement"));
         if (closest != null) {
-            moveAway(gs, worker, closest.getPos());
-            return;
+        //    moveAway(gs, worker, closest.getPos());
+         //   return;
         }
 
         if (towers.size() == 1) {
@@ -232,8 +232,8 @@ public class CombinedAi extends AbstractionLayerAI{
         if (gs.getDistance(worker.getPos(), towers.get(0).getPos()) >= 3+new Random().nextInt(3) && buildTower(worker, gs)) {
             return;
         }
-        Set<Hexagon<HexagonTile>> s1 = gs.getCalc().calculateMovementRangeFrom(gs.cube2hex(towers.get(0).getPos()), 6);
-        Set<Hexagon<HexagonTile>> s2 = gs.getCalc().calculateMovementRangeFrom(gs.cube2hex(towers.get(1).getPos()), 6);
+        Set<Hexagon<HexagonTile>> s1 = gs.getCalc().calculateMovementRangeFrom(gs.cube2hex(towers.get(0).getPos()), 10);
+        Set<Hexagon<HexagonTile>> s2 = gs.getCalc().calculateMovementRangeFrom(gs.cube2hex(towers.get(1).getPos()), 10);
         List<Hexagon<HexagonTile>> tiles = new ArrayList<>();
         List<Hexagon<HexagonTile>> topTiles = new ArrayList<>();
         for (Hexagon<HexagonTile> t : s1) {
@@ -280,7 +280,7 @@ public class CombinedAi extends AbstractionLayerAI{
 
 
     private void moveAway(GameState gameState, Entity entity, CubeCoordinate target) {
-        double distance = -1.7976931348623157E308D;
+        double distance = gameState.getDistance(entity.getPos(), target);
         CubeCoordinate next = null;
         Collection<Hexagon<HexagonTile>> neighbors = gameState.getRange(entity.getPos(), entity.getProperty("movement", 1));
         Iterator var7 = neighbors.iterator();
@@ -290,7 +290,10 @@ public class CombinedAi extends AbstractionLayerAI{
             Hexagon<HexagonTile> hex = (Hexagon)var7.next();
             if (gameState.getEntityAt(hex.getCubeCoordinate()) == null && gameState.getTerrainAt(hex.getCubeCoordinate()).isPassible(entity)) {
                 double myDist = (double)gameState.getDistance(hex.getCubeCoordinate(), target);
-                if (myDist > distance) {
+                if (myDist == distance) {
+                    cubeCoordinates.add(hex.getCubeCoordinate());
+                } else if (myDist > distance) {
+                    cubeCoordinates.clear();
                     cubeCoordinates.add(hex.getCubeCoordinate());
                     distance = myDist;
                 }
@@ -304,7 +307,7 @@ public class CombinedAi extends AbstractionLayerAI{
         }
     }
     public void moveTowards(GameState gameState, Entity entity, CubeCoordinate target) {
-        double distance = 1.7976931348623157E308D;
+        double distance = gameState.getDistance(entity.getPos(), target);
         CubeCoordinate next = null;
         Collection<Hexagon<HexagonTile>> neighbors = gameState.getRange(entity.getPos(), entity.getProperty("movement", 1));
         Iterator var7 = neighbors.iterator();
@@ -316,7 +319,11 @@ public class CombinedAi extends AbstractionLayerAI{
                 HexagonTile gt = (HexagonTile)hex.getSatelliteData().get();
                 if (gt.isPassable(entity)) {
                     double myDist = (double)gameState.getDistance(hex.getCubeCoordinate(), target);
-                    if (myDist < distance) {
+
+                    if (myDist == distance) {
+                        cubeCoordinates.add(hex.getCubeCoordinate());
+                    } else if (myDist < distance) {
+                        cubeCoordinates.clear();
                         cubeCoordinates.add(hex.getCubeCoordinate());
                         distance = myDist;
                     }
