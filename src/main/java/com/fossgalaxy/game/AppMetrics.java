@@ -29,7 +29,7 @@ public class AppMetrics extends AppEvolver {
 
     public static void main(String[] args) {
 
-        SettingsIO io = new SettingsIO();
+        SettingsIO io = SettingsIO.buildWithExtras("com.fossgalaxy.game");
         GameDef def = io.loadGameDef("game.json");
         AIFactory ai = new AIFactory(io, def.getEvalFileName(), def.getRuleFileName(), def.getAiFileName());
 
@@ -37,7 +37,7 @@ public class AppMetrics extends AppEvolver {
         GameSettings settings = io.loadSettings(def);
 
         //build the evolver using our base game
-        AppEvolver evo = new AppMetrics(io, settings, ai, "map_balance.json");
+        AppEvolver evo = new AppMetrics(io, settings, ai, "game-map.json");
 
         /*
         START PARAMETERS
@@ -45,9 +45,11 @@ public class AppMetrics extends AppEvolver {
 
         //tweak the red knight's defence between 0 and 10 in steps of 1
         evo.addParameter(new EntityProp("Blue_base", "health", 1, 10, 1));
+        evo.addParameter(new EntityProp("Red_base", "health", 1, 10, 1));
 
         //tweak the blue archer's attack between 0 and 10 in steps of 2
-        evo.addParameter(new EntityProp("Red_Tank", "atkMelee", 1, 5, 1));
+        evo.addParameter(new EntityProp("Red_Tower", "health", 1, 5, 1));
+        evo.addParameter(new EntityProp("Blue_Tower", "health", 1, 5, 1));
 
         /*
         END PARAMETERS
@@ -58,8 +60,10 @@ public class AppMetrics extends AppEvolver {
         GameSettings best = evo.evolve(evo::evaluate);
 
         //print out the settings the GA picked
-        System.out.println(best.getEntityType("Blue_Base").getProperty("health"));
-        System.out.println(best.getEntityType("Red_Tank").getProperty("atkMelee"));
+        System.out.println(best.getEntityType("Blue_base").getProperty("health"));
+        System.out.println(best.getEntityType("Red_base").getProperty("health"));
+        System.out.println(best.getEntityType("Blue_Tower").getProperty("health"));
+        System.out.println(best.getEntityType("Red_Tower").getProperty("health"));
 
         //then dump everything we tried to a CSV file...
         dumpToFile(evo, "logs/summary-"+System.currentTimeMillis()+".csv");
@@ -95,8 +99,8 @@ public class AppMetrics extends AppEvolver {
         Map<String, Integer> winRatesTwo = new HashMap<>();
         int draws = 0;
 
-        String stageAgent = "dumbBlue"; // the GA might be better here, but we don't have that kind of time...
-        List<String> oppAgents = Arrays.asList("dumbRed", "uct", "combRed", "tunedAiRed");
+        String stageAgent = "combBlue"; // the GA might be better here, but we don't have that kind of time...
+        List<String> oppAgents = Arrays.asList("combRed", "uct");
 
         boolean[] stageFirst = {true, false};
 
