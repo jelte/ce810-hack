@@ -168,7 +168,7 @@ public class CombinedAi extends AbstractionLayerAI{
             attack(unit, closestEnemy, pgs);
             double dist = (double)pgs.getDistance(unit.getPos(), closestEnemy.getPos());
             if(dist > 1.0D) {
-                this.moveTowards(unit, closestEnemy.getPos(), pgs);
+                this.moveTowards(pgs, unit, closestEnemy.getPos());
             } else {
                 this.actions.put(unit.getID(), new AttackOrder(closestEnemy.getID()));
             }
@@ -214,7 +214,7 @@ public class CombinedAi extends AbstractionLayerAI{
         // Move away from tanks
         Entity closest = getClosestUnfriendly(worker, gs, tankType.getProperty("attackRange"));
         if (closest != null) {
-            moveAway(worker, closest.getPos(), gs);
+            moveAway(gs, worker, closest.getPos());
             return;
         }
 
@@ -254,7 +254,7 @@ public class CombinedAi extends AbstractionLayerAI{
                 topTiles.add(t);
             }
         }
-        moveTowards(worker, topTiles.get(new Random().nextInt(topTiles.size())).getCubeCoordinate(), gs);
+        moveTowards(gs, worker, topTiles.get(new Random().nextInt(topTiles.size())).getCubeCoordinate());
     }
 
     private boolean buildTower(Entity worker, GameState gs)
@@ -282,7 +282,7 @@ public class CombinedAi extends AbstractionLayerAI{
     private void moveAway(GameState gameState, Entity entity, CubeCoordinate target) {
         double distance = -1.7976931348623157E308D;
         CubeCoordinate next = null;
-        Collection<Hexagon<HexagonTile>> neighbors = gameState.getNeighbors(entity.getPos());
+        Collection<Hexagon<HexagonTile>> neighbors = gameState.getRange(entity.getPos(), entity.getProperty("movement", 1));
         Iterator var7 = neighbors.iterator();
 
         List<CubeCoordinate> cubeCoordinates = new ArrayList<>();
@@ -306,7 +306,7 @@ public class CombinedAi extends AbstractionLayerAI{
     public void moveTowards(GameState gameState, Entity entity, CubeCoordinate target) {
         double distance = 1.7976931348623157E308D;
         CubeCoordinate next = null;
-        Collection<Hexagon<HexagonTile>> neighbors = gameState.getNeighbors(entity.getPos());
+        Collection<Hexagon<HexagonTile>> neighbors = gameState.getRange(entity.getPos(), entity.getProperty("movement", 1));
         Iterator var7 = neighbors.iterator();
 
         List<CubeCoordinate> cubeCoordinates = new ArrayList<>();

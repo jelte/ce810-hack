@@ -87,8 +87,8 @@ public class AppMetrics extends AppEvolver {
      */
     public List<Predicate<? super EvolutionResult<IntegerGene, Double>>> getLimits() {
         return Arrays.asList(
-                Limits.byExecutionTime(Duration.ofMinutes(10)),
-                Limits.byFixedGeneration(20)
+                Limits.byExecutionTime(Duration.ofMinutes(30)),
+                Limits.byFixedGeneration(100)
         );
     }
 
