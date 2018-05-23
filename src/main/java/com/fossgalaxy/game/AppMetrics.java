@@ -40,6 +40,10 @@ public class AppMetrics extends AppEvolver {
         //build the evolver using our base game
         AppEvolver evo = new AppMetrics(io, settings, ai, "game-map.json");
 
+        if (args.length == 2) {
+            evo.playHumanGame(args[0], Integer.parseInt(args[1]), "Player", "combRed");
+            return;
+        }
         /*
         START PARAMETERS
          */
@@ -50,9 +54,11 @@ public class AppMetrics extends AppEvolver {
         evo.addParameter(new EntityProp("abstract_tower", "health", 1, 2, 1));
         evo.addParameter(new EntityCost("abstract_tower", "energy", 1, 5, 1));
         evo.addParameter(new EntityProp("abstract_tower", "expandRate", 10, 100, 1));
+        evo.addParameter(new EntityProp("abstract_soldier", "health", 1, 5, 1));
         evo.addParameter(new EntityProp("abstract_soldier", "movement", 2, 5, 1));
         evo.addParameter(new EntityProp("abstract_soldier", "atkMelee", 1, 5, 1));
         evo.addParameter(new EntityCost("abstract_soldier", "energy", 20, 50, 1));
+        evo.addParameter(new EntityProp("abstract_civilian", "health", 1, 5, 1));
         evo.addParameter(new EntityProp("abstract_civilian", "movement", 2, 5, 1));
         evo.addParameter(new EntityCost("abstract_civilian", "energy", 10, 20, 1));
 
@@ -134,6 +140,8 @@ public class AppMetrics extends AppEvolver {
                     };
 
                     GameState state = new GameState(start);
+                    state.setResource(0, state.getSettings().getResourceType("energy"), 10);
+                    state.setResource(1, state.getSettings().getResourceType("energy"), 10);
                     GameMetrics metrics = AppEvolver.runGame(state, settings, controllers);
 
                     //metrics tells us stuff about the game.

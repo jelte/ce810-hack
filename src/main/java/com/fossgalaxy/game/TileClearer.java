@@ -85,13 +85,12 @@ public class TileClearer {
             }
         } catch (NoSuchElementException e) {
         }
+        countTiles(state);
     }
 
     private static void clearTile(CubeCoordinate coord, GameState state, ResourceType tiles, TerrainType walkable)
     {
         state.setTerrainAt(coord, walkable);
-        state.setResource(0, tiles, state.getResource(0, tiles) - 1 < 0 ? 0 : state.getResource(0, tiles) - 1);
-        state.setResource(1, tiles, state.getResource(1, tiles) - 1 < 0 ? 0 : state.getResource(1, tiles) - 1);
         //convertedTiles.remove(coord);
     }
 
@@ -162,14 +161,30 @@ public class TileClearer {
                 }
             }
             grounds.addAll(addedGround);
-            ResourceType tiles = state.getSettings().getResourceType("tiles_"+(host.getOwner() == 0?"blue":"red"));
             // assign terrains
             for (int m = 0; m < quantityPerTurn && m < grounds.size(); m++) {
                 state.setTerrainAt(grounds.get(m), hostTerrainType);
-                state.setResource(0, tiles, state.getResource(0, tiles) + 1);
-                state.setResource(1, tiles, state.getResource(1, tiles) + 1);
-             //   TileClearer.convertedTiles.add(grounds.get(m));
             }
         } catch (NoSuchElementException e) {}
+
+        countTiles(state);
+    }
+
+    private static void countTiles(GameState state) {
+        int red = 0;
+        int blue = 0;
+        for (int x = 0; x < state.getWidth(); x++) {
+            for (int z = 0; z < state.getHeight(); z++) {
+                if ( state.getTerrainAt(CubeCoordinate.fromCoordinates(x, z)) != null) {
+                    red += state.getTerrainAt(CubeCoordinate.fromCoordinates(x, z)).getName().startsWith("gred") ? 1 : 0;
+                    blue += state.getTerrainAt(CubeCoordinate.fromCoordinates(x, z)).getName().startsWith("blue") ? 1 : 0;
+                }
+            }
+        }
+
+        state.setResource(0, state.getSettings().getResourceType("tiles_blue"), blue);
+        state.setResource(0, state.getSettings().getResourceType("tiles_red"), red);
+        state.setResource(1, state.getSettings().getResourceType("tiles_blue"), blue);
+        state.setResource(1, state.getSettings().getResourceType("tiles_red"), red);
     }
 }
