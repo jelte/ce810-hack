@@ -2,14 +2,14 @@
   {
     "name":"abstract_soldier",
     "properties": {
-      "movement":2,
-      "health":5,
+      "movement":3,
+      "health":1,
       "attackRange": 1,
       "atkMelee":2,
       "ter-grass":1
     },
     "cost":{
-      "energy":29
+      "energy":15
     },
     "_actions":[
       "AttackA",
@@ -19,12 +19,12 @@
   {
     "name":"abstract_civilian",
     "properties": {
-      "movement":3,
-      "health":5,
+      "movement":2,
+      "health":1,
       "ter-grass":1
     },
     "cost":{
-      "energy":17
+      "energy":10
     },
     "_actions":[
       "Move"
@@ -43,13 +43,13 @@
   {
     "name": "abstract_tower",
     "properties": {
-      "health": 2,
+      "health": 1,
       "ter-buildable": 1,
       "has_passive": 1,
-      "expandRate": 26
+      "expandRate": 50
     },
     "cost": {
-      "energy": 4
+      "energy": 1
     },
     "_actions": [
       ".Expand"
@@ -58,9 +58,9 @@
   {
     "name": "abstract_base",
     "properties": {
-      "health": 8,
+      "health": 10,
       "has_passive": 1,
-      "generateRate": 6
+      "generateRate": 10
     },
     "cost": {
       "energy": 0
