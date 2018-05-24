@@ -1,0 +1,72 @@
+[
+  {
+    "name":"abstract_soldier",
+    "properties": {
+      "movement":3,
+      "health":1,
+      "attackRange": 1,
+      "atkMelee":2,
+      "ter-grass":1
+    },
+    "cost":{
+      "energy":15
+    },
+    "_actions":[
+      "AttackA",
+      "Move"
+    ]
+  },
+  {
+    "name":"abstract_civilian",
+    "properties": {
+      "movement":2,
+      "health":1,
+      "ter-grass":1
+    },
+    "cost":{
+      "energy":10
+    },
+    "_actions":[
+      "Move"
+    ]
+  },
+  {
+    "name": "abstract_minerals",
+    "_sprite": {
+      "_image": "image path",
+      "scale": 0.75
+    },
+    "properties": {
+      "health": 10
+    }
+  },
+  {
+    "name": "abstract_tower",
+    "properties": {
+      "health": 1,
+      "ter-buildable": 1,
+      "has_passive": 1,
+      "expandRate": 50
+    },
+    "cost": {
+      "energy": 1
+    },
+    "_actions": [
+      ".Expand"
+    ]
+  },
+  {
+    "name": "abstract_base",
+    "properties": {
+      "health": 10,
+      "has_passive": 1,
+      "generateRate": 10
+    },
+    "cost": {
+      "energy": 0
+    },
+    "_actions": [
+      "AutoGenerate[energy]"
+    ]
+  }
+]
